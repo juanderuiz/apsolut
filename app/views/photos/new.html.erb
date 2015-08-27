@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-4 col-md-offset-4 bg-info text-center">
+  <%= bootstrap_form_for(@photo) do |form| %>
+    <%= form.form_group do %>
+      <%= form.file_field :image, label:"Queremos ver tus fotos!" %>
+    <% end %>
+    <%= form.form_group do %>
+	    <%= form.submit 'Añadir', class: "btn btn-success" %>
+    <% end %>
+  <% end %>
+  </div>
+</div>

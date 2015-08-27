@@ -3,8 +3,17 @@ class PhotosController < ApplicationController
 
   def index
   	@photos = Photo.limit(3).order(id: :desc)
-    @total = @photos.count()
+    @total = Photo.all.count()
   	@photo = Photo.new
+  end
+
+  def allimages
+    @photos = Photo.all.order(id: :desc)
+    @total = @photos.count()
+  end
+
+  def new
+    @photo = Photo.new
   end
 
   def show
@@ -16,11 +25,11 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to @photo, notice: 'Foto subida!.' }
+        format.html { redirect_to photos_path, notice: 'Foto subida!.' }
         #format.json { render action: 'show', status: :created, location: @runner }
       else
-      	flash.alert = "Error!"
-        #format.html { render action: 'show' }
+      	#flash.alert = "Error!"
+        format.html { render action: 'new' }
         #format.json { render json: @runner.errors, status: :unprocessable_entity }
       end
     end
@@ -34,6 +43,7 @@ class PhotosController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
     def photo_params
-      params.require(:photo).permit(:image)
+      #params.require(:photo).permit(:image)
+      params.fetch(:photo, {}).permit(:image)
     end
 end

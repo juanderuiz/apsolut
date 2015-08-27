@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-md-12 text-center">
+    <h2>Ya tenemos <%= @total %> fotos! <span><%= link_to "Subir más", controller: "photos", action: "new" %></span></h2>
+    
+  </div>
+</div>
+
+<div class="row">
+  <ul class="list-group list-unstyled">
+    <%= render @photos %>
+  </ul>
+</div>

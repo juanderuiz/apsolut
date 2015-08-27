@@ -1,5 +1,26 @@
-<h2>Foto Nº <%= @photo.id %></h2>
+<div class="row hidden-xs">
+  <div class="col-md-12 text-center">
+    <h3>Foto Nº <%= @photo.id %></h3>
+  </div>
+</div>
 
-<div>
-  <%= image_tag @photo.image.url(:big) %>
+<div class="row">
+  <div class="col-md-2 col-md-offset-4 text-center">
+    <h3><%= link_to "Ver todas", controller: "photos", action: "allimages" %></h3>
+  </div>
+  <div class="col-md-2 text-center">
+    <h3><%= link_to "Subir otra!", controller: "photos", action: "new" %></h3>
+  </div>
+</div>
+
+<div class="row hidden-xs">
+  <div class="col-md-12 center-block">
+    <%= image_tag(@photo.image.url(:big), :class => "center-block") %>
+  </div>
+</div>
+
+<div class="row hidden-sm hidden-md hidden-lg">
+  <div class="col-xs-10 center-block">
+    <%= image_tag(@photo.image.url(:thumb), :class => "center-block") %>
+  </div>
 </div>
