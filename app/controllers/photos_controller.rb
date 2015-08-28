@@ -25,11 +25,12 @@ class PhotosController < ApplicationController
 
     respond_to do |format|
       if @photo.save
-        format.html { redirect_to photos_path, notice: 'Foto subida!.' }
+        format.html { redirect_to new_photo_path, notice: 'Foto subida!.' }
         #format.json { render action: 'show', status: :created, location: @runner }
       else
       	#flash.alert = "Error!"
-        format.html { render action: 'new' }
+        #format.html { render action: 'new' }
+        format.html { redirect_to new_photo_path }
         #format.json { render json: @runner.errors, status: :unprocessable_entity }
       end
     end

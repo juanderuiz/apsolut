@@ -1,5 +1,11 @@
-<div class="col-md-4 list-group-item">
+<div class="col-md-4 list-group-item hidden-xs">
   <li>
     <%=link_to( image_tag(photo.image.url(:medium), :class => "img-rounded img-responsive center-block"), photo_path(photo)) %>
+  </li>
+</div>
+
+<div class="col-md-4 list-group-item hidden-sm hidden-md hidden-lg">
+  <li>
+    <%=link_to( image_tag(photo.image.url(:thumb), :class => "img-rounded img-responsive center-block"), photo_path(photo)) %>
   </li>
 </div>
