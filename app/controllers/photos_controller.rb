@@ -2,9 +2,7 @@ class PhotosController < ApplicationController
   before_action :set_photo, only: [:show]
 
   def index
-  	@photos = Photo.limit(3).order(id: :desc)
-    @total = Photo.all.count()
-  	@photo = Photo.new
+  	@photos = Photo.all.order(id: :desc)
   end
 
   def allimages
@@ -14,6 +12,8 @@ class PhotosController < ApplicationController
 
   def new
     @photo = Photo.new
+    @photos = Photo.limit(3).order(id: :desc)
+    @total = Photo.all.count()
   end
 
   def show

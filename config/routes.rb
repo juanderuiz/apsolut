@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'photos#index'
+  root 'photos#new'
 
   resources :photos do
   	get 'allimages', :on => :collection
