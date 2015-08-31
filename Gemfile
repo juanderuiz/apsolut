@@ -27,6 +27,13 @@ gem 'coffee-rails', '~> 4.0.0'
 # Gem Paperclip 
 gem "paperclip", "~> 4.3"
 
+# Gem AWS
+gem 'aws-sdk', '~> 1.36.1'
+gem 'fog'
+#Gem Figaro
+gem 'figaro'
+
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
