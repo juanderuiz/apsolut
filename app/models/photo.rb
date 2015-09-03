@@ -3,7 +3,7 @@ class Photo < ActiveRecord::Base
   default_url: "/images/:style/missing.png",
   :url  => ":s3_domain_url",
   :path => "public/system/photos/images/000/000/:id/:style_:basename.:extension",
-  :storage => Fog::Storage.new(credentials.merge({:region => DEFAULT_REGION})),
+  :storage => :fog,
   :fog_credentials => {
         provider: 'AWS',
         aws_access_key_id: ENV["AWS_ACCESS_KEY_ID"],
