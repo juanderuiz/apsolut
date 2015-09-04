@@ -16,6 +16,8 @@ class PhotosController < ApplicationController
     @photo = Photo.new
     @photos = Photo.limit(3).order(id: :desc)
     @total = Photo.all.count()
+    #number of images to show in below the upload form
+    @inicio = @photos.count()
   end
 
   def show
