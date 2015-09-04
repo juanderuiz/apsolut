@@ -1,12 +1,6 @@
 <div class="row">
-  <div class="col-sm-12 hidden-xs text-center">
-    <h2>Las Mejores Fotos de Nuestra Boda</h2>
-  </div>
-</div>
-
-<div class="row">
   <div class="col-sm-12 col-xs-10 text-center">
-    <h2><%= link_to "VerTodas", controller: "photos", action: "index" %><span class="bg-primary"><%= "(" + @total.to_s + ")" %></span></h2>
+    <h2><%= link_to "Ver Todas", controller: "photos", action: "index" %><span><%= "(" + @total.to_s + ")" %></span></h2>
   </div>
 </div>
 
@@ -29,8 +23,33 @@
   </div>
 </div>
 
-<div class="row">
-  <ul class="list-group list-unstyled">
-    <%= render @photos %>
-  </ul>
+<div class="row hidden-xs">
+  <table class="table">
+    <% i=0; rowplace=1; %>
+    <% while (i<3) do %>
+    <% foto = @photos.at(i) %>
+    <% if (rowplace==1) %>
+      <tr class="col-sm-12">
+    <% end %>
+    <%= render foto %>
+    <% if (rowplace==3) %>
+      </tr>
+      <% rowplace = 0 %>
+    <% end %>
+    <% i = i+1 %>
+    <% rowplace = rowplace + 1 %>
+    <% end %>
+  </table>
+</div>
+
+<div class="row hidden-sm hidden-md hidden-lg">
+  <div class="col-xs-12 text-center">
+    <table class="table">
+      <% @photos.each do |photo| %>
+      <tr class="col-xs-12">
+        <%= render photo %>
+      </tr>
+      <% end %>
+    </table>
+  </div>
 </div>

@@ -3,6 +3,8 @@ class PhotosController < ApplicationController
 
   def index
   	@photos = Photo.all.order(id: :desc)
+    @photoxs = @photos
+    @total = @photos.count()
   end
 
   def allimages
