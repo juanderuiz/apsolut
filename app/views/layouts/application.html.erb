@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Myimages</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -11,7 +14,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-sm-12 col-xs-12 text-center">
-      <%= image_tag "wedding.jpg" %>
+      <%=link_to(image_tag("wedding.jpg"), root_url) %>
     </div>
 </div>
   <%= yield %>
