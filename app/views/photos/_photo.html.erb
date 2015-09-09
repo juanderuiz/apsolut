@@ -1,8 +1,8 @@
 
-  <td class="col-sm-4 hidden-xs">
+  <td class="col-sm-4 hidden-xs center-block">
     <%=link_to( image_tag(photo.image.url(:medium), :class => "img-rounded img-responsive center-block"), photo_path(photo)) %>
   </td>
 
-  <td class="col-xs-12 visible-xs">
+  <td class="col-xs-12 visible-xs center-block">
     <%=link_to( image_tag(photo.image.url(:thumb), :class => "img-rounded img-responsive center-block"), photo_path(photo)) %>
   </td>

@@ -24,7 +24,7 @@
       <tr class="col-sm-12">
     <% end %>
     <%= render foto %>
-    <% if (rowplace==3) %>
+    <% if (rowplace==3 || i==@total) %>
       </tr>
       <% rowplace = 0 %>
     <% end %>
