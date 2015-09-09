@@ -1,5 +1,5 @@
 class PhotosController < ApplicationController
-  before_action :set_photo, only: [:show]
+  before_action :set_photo, only: [:show, :destroy]
 
   def index
   	@photos = Photo.all.order(id: :desc)
@@ -10,6 +10,10 @@ class PhotosController < ApplicationController
   def allimages
     @photos = Photo.all.order(id: :desc)
     @total = @photos.count()
+  end
+
+  def alert
+    @photo = Photo.find(params[:photo_id])
   end
 
   def new
@@ -36,6 +40,17 @@ class PhotosController < ApplicationController
         #format.html { render action: 'new' }
         format.html { redirect_to new_photo_path }
         #format.json { render json: @runner.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    #@photo = Photo.find(params[:id])
+    respond_to do |format|
+      if @photo.destroy
+        format.html { redirect_to new_photo_path, notice: 'Foto eliminada!.' }
+      else
+        format.html { redirect_to new_photo_path }
       end
     end
   end
