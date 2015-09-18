@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-sm-12 col-xs-10 text-center">
-    <h2><%= link_to "Ver Todas", controller: "photos", action: "index" %><span><%= "(" + @total.to_s + ")" %></span></h2>
+    <h2><%= link_to "Ver Todas", controller: "photos", action: "index" %><span class="text-info"><%= "(" + @total.to_s + ")" %></span></h2>
   </div>
 </div>
 
@@ -11,7 +11,7 @@
       <%= form.file_field :image, label:"Queremos ver tus fotos!" %>
     <% end %>
     <%= form.form_group do %>
-      <%= form.submit 'Añadir', class: "btn btn-primary" %>
+      <%= form.submit 'Añadir', class: "btn btn-primary btn-lg" %>
     <% end %>
   <% end %>
   </div>
