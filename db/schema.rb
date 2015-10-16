@@ -11,7 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151016102642) do
+ActiveRecord::Schema.define(version: 20151016112547) do
+
+  create_table "meetings", force: true do |t|
+    t.string   "subject"
+    t.integer  "user_id"
+    t.date     "day"
+    t.time     "start"
+    t.time     "finish"
+    t.string   "room"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "meetings", ["user_id"], name: "index_meetings_on_user_id"
 
   create_table "photos", force: true do |t|
     t.string   "image_file_name"

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resource :dashboard, only: [:show]
 
   resources :users do
+  	resources :meetings
   	resources :photos
   end
 

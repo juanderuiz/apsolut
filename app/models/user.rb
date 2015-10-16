@@ -15,4 +15,5 @@ class User < ActiveRecord::Base
 
   #RELATIONSHIPS
   has_many :photos,  dependent: :destroy
+  has_many :meetings
 end
