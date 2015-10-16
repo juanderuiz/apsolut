@@ -33,6 +33,9 @@ gem 'fog'
 #Gem Figaro
 gem 'figaro'
 
+# Gem Devise
+gem 'devise'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

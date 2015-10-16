@@ -14,4 +14,5 @@ class Photo < ActiveRecord::Base
 
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\Z/
   validates :image, attachment_presence: true
+  belongs_to :user
 end

@@ -1,11 +1,12 @@
 Rails.application.routes.draw do
 
-  root 'photos#new'
+  devise_for :users
+  root 'homes#show', via: :get
 
-  resources :photos do
-  	get 'alert', :to => 'photos#alert'
-  	#get 'allimages', :on => :collection
+  resource :dashboard, only: [:show]
+
+  resources :users do
+  	resources :photos
   end
 
-  #get 'allimages' => 'photos#allimages', :as => 'allimages'
 end
