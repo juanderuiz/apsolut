@@ -4,10 +4,15 @@ class MeetingsController < ApplicationController
   #Need to validate that a meeting is not overlapping another one
 
   def create
-  	meeting = current_user.meetings.build(meeting_params)
+  	@meeting = current_user.meetings.build(meeting_params)
   	# Check fields
-  	meeting.save
-  	redirect_to user_meetings_path(@user)
+    respond_to do |format|
+  	  if @meeting.save
+  	    format.html { redirect_to user_meetings_path, notice: 'Meeting sucesfully added!' }
+      else
+        format.html { render action: 'edit' }
+      end
+    end
   end
 
   def new
@@ -17,7 +22,7 @@ class MeetingsController < ApplicationController
   def index
   	 @meeting = Meeting.new
      @meetings = Meeting.all
-     @meetings_by_date = @meetings.group_by(&:day)
+     @meetings_by_date = @meetings.order(:day, :start).group_by(&:day)
   end
 
   def show
@@ -75,6 +80,6 @@ class MeetingsController < ApplicationController
   end
 
   def get_meeting
-    @meeting = Meeting.find(params[:id])
+    @meeting = Meeting.find(params[:id]) || Meeting.new
   end
 end

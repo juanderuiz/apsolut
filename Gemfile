@@ -36,6 +36,10 @@ gem 'figaro'
 # Gem Devise
 gem 'devise'
 
+# Gem Date Validator
+gem 'date_validator'
+gem 'validates_timeliness', '~> 3.0'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
