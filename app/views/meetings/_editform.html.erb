@@ -1,0 +1,29 @@
+<div class="col-sm-3 col-sm-offset-1 col-xs-3 bg-info text-center">
+  	<h3>Edit Meeting</h3>
+  	<% if @meeting.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
+
+        <ul>
+          <% @meeting.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+	<%= bootstrap_form_for([@user, @meeting]) do |f| %>
+	    <%= f.form_group do %>
+        <%= f.text_field :subject, label:"What's the meeting about?" %>
+      <% end %>
+      <%= f.form_group do %>
+        <%= f.text_field :day, label:"Date" %>
+      <% end %>
+	    <%= f.time_field :start %>
+	    <%= f.time_field :finish %>
+	    <%= f.text_field :room %>
+	    <%= f.form_group do %>
+	      <%= f.submit "Add Meeting", class: "btn btn-primary btn-lg" %>
+	    <% end %>
+	<% end %>
+</div>

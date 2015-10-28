@@ -1,22 +1,38 @@
 class MeetingsController < ApplicationController
   before_action :get_user
   before_action :get_meeting, only: [:show, :edit, :destroy, :update]
-  #Need to validate that a meeting is not overlapping another one
+  #Need to validate that a meeting is not overlapping another one -> DONE
 
   def create
   	@meeting = current_user.meetings.build(meeting_params)
+    #Check possible overlap
+
+    @meetingsRD = Meeting.where("day = ? and room = ?", @meeting.day, @meeting.room)
+    overlap = false
+    @meetingsRD.each do |mtng|
+       if ((@meeting.finish <= mtng.start) || (@meeting.start >= mtng.finish))
+         overlap = false
+       else
+         overlap = true
+         @meeting.errors[:start] << 'Overlap?'
+         @meeting.errors[:finish] << 'Overlap?'
+         break
+       end
+    end
+
   	# Check fields
     respond_to do |format|
-  	  if @meeting.save
-  	    format.html { redirect_to user_meetings_path, notice: 'Meeting sucesfully added!' }
-      else
-        format.html { render action: 'edit' }
-      end
+  	    if !overlap && @meeting.save
+  	      format.html { redirect_to user_meetings_path, notice: 'Meeting sucesfully added!' }
+        else
+          #format.html { redirect_to user_meetings_path, notice: 'Errors creating meeting' }
+          format.html { render action: 'edit' }
+        end
     end
   end
 
   def new
-  	#@meeting = Meeting.new
+  	#@meeting  = Meeting.new
   end
 
   def index

@@ -1,4 +1,5 @@
 class Meeting < ActiveRecord::Base
+  #validate :not_overlaping_room, on: [:create, :update]
   #include ActiveModel::Validations
   #validates_with MeetingValidator
 
