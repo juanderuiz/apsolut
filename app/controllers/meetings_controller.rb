@@ -1,29 +1,18 @@
 class MeetingsController < ApplicationController
   before_action :get_user
   before_action :get_meeting, only: [:show, :edit, :destroy, :update]
-  #Need to validate that a meeting is not overlapping another one -> DONE
+  #Need to validate that a meeting is not overlapping another one
 
   def create
   	@meeting = current_user.meetings.build(meeting_params)
     #Check possible overlap
 
     @meetingsRD = Meeting.where("day = ? and room = ?", @meeting.day, @meeting.room)
-    overlap = false
-    @meetingsRD.each do |mtng|
-       if ((@meeting.finish <= mtng.start) || (@meeting.start >= mtng.finish))
-         overlap = false
-       else
-         overlap = true
-         @meeting.errors[:start] << 'Overlap?'
-         @meeting.errors[:finish] << 'Overlap?'
-         break
-       end
-    end
 
   	# Check fields
     respond_to do |format|
-  	    if !overlap && @meeting.save
-  	      format.html { redirect_to user_meetings_path, notice: 'Meeting sucesfully added!' }
+  	    if @meeting.save
+  	      format.html { redirect_to user_meetings_path, notice: 'Meeting sucesfully added!' + @meetingsRD.size().to_s }
         else
           #format.html { redirect_to user_meetings_path, notice: 'Errors creating meeting' }
           format.html { render action: 'edit' }
@@ -37,7 +26,8 @@ class MeetingsController < ApplicationController
 
   def index
   	 @meeting = Meeting.new
-     @meetings = Meeting.all
+     #Just show meetings for current day and future ones
+     @meetings = Meeting.where("day >= ?", Date.today)
      @meetings_by_date = @meetings.order(:day, :start).group_by(&:day)
   end
 
@@ -53,9 +43,29 @@ class MeetingsController < ApplicationController
   end
 
   def update
+    #@meetingsRD = Meeting.where("day = ? and room = ? and (start <= ? and finish >= ?)", meeting_params[:day], meeting_params[:room], meeting_params[:start], meeting_params[:start])
+    @meetingsRD = Meeting.where("day = ? and room = ?", meeting_params[:day], meeting_params[:room])
+    overlap = false
+    @meetingsRD.each do |mtng|
+      if (meeting_params[:id] != mtng.id) #Not to compare with the same meeting
+       if ((meeting_params[:finish] <= mtng.start) || (meeting_params[:start] >= mtng.finish))
+         overlap = false
+       else
+         overlap = true
+         if (@meeting.finish > mtng.start)
+           @meeting.errors[:finish] << 'Sorry! It overlaps ' + (mtng.subject).upcase + ' meeting'
+         else
+           @meeting.errors[:start] << 'Sorry! It overlaps ' + (mtng.subject).upcase + ' meeting'
+         end
+         break
+       end
+      end
+    end
+
+
     respond_to do |format|
-      if @meeting.update(meeting_params)
-        format.html { redirect_to user_meetings_path, notice: 'Meeting Updated!' }
+      if !overlap && @meeting.update(meeting_params)
+        format.html { redirect_to user_meetings_path, notice: 'Meeting Updated!' + @meetingsRD.size().to_s }
         #format.json { head :no_content }
       else
         format.html { render action: 'edit' }

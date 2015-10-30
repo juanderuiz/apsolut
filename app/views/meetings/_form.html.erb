@@ -15,12 +15,12 @@
 
 	<%= bootstrap_form_for([@user, @meeting]) do |f| %>
 	    <%= f.form_group do %>
-        <%= f.text_field :subject, label:"What's the meeting about?" %>
+        <%= f.text_field :subject, label:"What's the meeting about?", :placeholder => "Budget negotiation..." %>
       <% end %>
       <%= f.form_group do %>
-        <%= f.text_field :day, label:"Date" %>
+        <%= f.text_field :day, label:"Date", :placeholder => "yyyy-mm-dd" %>
       <% end %>
-	    <%= f.time_field :start %>
+	    <%= f.time_field :start, :placeholder => "hh:mm" %>
 	    <%= f.time_field :finish %>
 	    <%= f.text_field :room %>
 	    <%= f.form_group do %>
