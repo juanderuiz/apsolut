@@ -40,31 +40,17 @@ class MeetingsController < ApplicationController
     if (@meeting.user_id != current_user.id)
       redirect_to user_meetings_path, notice: 'Sorry! Not your meeting'
     end
+    @meetings = Meeting.where("day >= ?", Date.today)
+    @meetings_by_date = @meetings.order(:day, :start).group_by(&:day)
+    #@meetingsSameDay = Meeting.where("day = ? and room = ?", meeting_params[:day], meeting_params[:room])
   end
 
   def update
     #@meetingsRD = Meeting.where("day = ? and room = ? and (start <= ? and finish >= ?)", meeting_params[:day], meeting_params[:room], meeting_params[:start], meeting_params[:start])
     @meetingsRD = Meeting.where("day = ? and room = ?", meeting_params[:day], meeting_params[:room])
-    overlap = false
-    @meetingsRD.each do |mtng|
-      if (meeting_params[:id] != mtng.id) #Not to compare with the same meeting
-       if ((meeting_params[:finish] <= mtng.start) || (meeting_params[:start] >= mtng.finish))
-         overlap = false
-       else
-         overlap = true
-         if (@meeting.finish > mtng.start)
-           @meeting.errors[:finish] << 'Sorry! It overlaps ' + (mtng.subject).upcase + ' meeting'
-         else
-           @meeting.errors[:start] << 'Sorry! It overlaps ' + (mtng.subject).upcase + ' meeting'
-         end
-         break
-       end
-      end
-    end
-
 
     respond_to do |format|
-      if !overlap && @meeting.update(meeting_params)
+      if @meeting.update(meeting_params)
         format.html { redirect_to user_meetings_path, notice: 'Meeting Updated!' + @meetingsRD.size().to_s }
         #format.json { head :no_content }
       else

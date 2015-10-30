@@ -12,7 +12,10 @@ class Meeting < ActiveRecord::Base
   #Meeting is today or in the future...
   validates_date :day, :on_or_after => lambda { Date.current }
 
-  #If the meeting is for today... start must be after now... may with a method
+  #If the meeting is for today... start should be after now... but let's imagine
+  #that we were in a hurry, the room was empty and we started a meeting, so we don't
+  #want to be interrupted... and decide to book that meeting, so it will appear on
+  #the system
 
   #Check that a new meeting does not overlap other meeting in the same room
   def not_overlapping
