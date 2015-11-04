@@ -1,11 +1,15 @@
-<div id="meeting">
-  <%= render @meeting %>
-</div>
-
-<div>
-  <ul>
-    <li><%= link_to 'Edit', edit_user_meeting_path(@user, @meeting) %></li>
-    <li><%= link_to 'View All', user_meetings_path(@user) %></li>
-    <li><%= link_to 'Delete', [@user, @meeting], method: :delete, data: {confirm: "Are you sure?"} %></li>
-  </ul>
-</div>
+<div class="row">
+  <div class="col-xs-9 col-sm-6 col-sm-offset-1 bg-info text-center">
+    <div class="meeting text-center col-sm-10 col-sm-offset-1 col-xs-10 col-xs-1-offset">
+      <% @owner = User.find(@meeting.user_id) %>
+      <p class="bg-warning">About: <%= link_to @meeting.subject, [@user, @meeting] %> - Start <%= @meeting.start.strftime("at %H:%M %p") %> - Finish <%= @meeting.finish.strftime("at %H:%M %p") %><br>Room: <%= @meeting.room %> - Owner: <%= @owner.name %></p>
+      <div>
+        <ul class="list-inline">
+          <li><%= link_to 'Edit', edit_user_meeting_path(@user, @meeting) %></li>
+          <li><%= link_to 'View All', user_meetings_path(@user) %></li>
+          <li><%= link_to 'Delete', [@user, @meeting], method: :delete, data: {confirm: "Are you sure?"} %></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>  

@@ -9,7 +9,7 @@
       <% for meeting in meetings %>
         <% owner = User.find(meeting.user_id) %>
         <div class="meeting text-center col-sm-10 col-sm-offset-1 col-xs-10 col-xs-1-offset">
-          <p class="bg-warning">About: <%= link_to meeting.subject, [@user, meeting] %> - Start <%= meeting.start.strftime("at %H:%M %p") %> - Finish <%= meeting.finish.strftime("at %H:%M %p") %><br>Room: <%= meeting.room %> - Owner: <%= owner.email %></p>
+          <p class="bg-warning">About: <%= link_to meeting.subject, [@user, meeting] %> - Start <%= meeting.start.strftime("at %H:%M %p") %> - Finish <%= meeting.finish.strftime("at %H:%M %p") %><br>Room: <%= meeting.room %> - Owner: <%= owner.name %></p>
         </div>
       <% end %>
     <% end %>

@@ -16,7 +16,10 @@
     <%= link_to image_tag("apsolut.png"), root_url, :class => 'navbar-brand' %>
     <ul class='nav nav-pills navbar-right'>
       <% if user_signed_in? %>
-        <li><%= link_to "Bienvenido " + current_user.email, current_user %></li>
+        <li><%= link_to "Hello " + current_user.name.to_s, root_url %></li>
+        <% if current_user %>
+          <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+        <% end %>  
         <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
       <% else %>
         <li><%= link_to 'Sign In', new_user_session_path %></li>
