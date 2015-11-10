@@ -1,0 +1,37 @@
+<div class="col-sm-3 col-sm-offset-1 col-xs-3 bg-info text-center">
+  	<h3>New Quarter</h3>
+  	<% if @quarter.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@quarter.errors.count, "error") %> prohibited this quarter from being saved:</h2>
+
+        <ul>
+          <% @quarter.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+	<%= bootstrap_form_for([@user, @quarter]) do |f| %>
+      <div class="field">
+        <% @users = User.all %>
+        <% if @users.empty?%>
+          <%= f.label "No mates available" %>
+        <% else %>
+          <%= f.collection_select :user_id, @users, :id, :name, {prompt: "Select one"} %>  
+        <% end %>
+      </div>
+	    <%= f.form_group do %>
+        <%= f.number_field :hours, label:"Booked hours", :placeholder => "Ej: 368" %>
+      <% end %>
+      <%= f.form_group do %>
+        <%= f.select :quart, (1..4), label:"Which quarter?" %>
+      <% end %>
+      <%= f.form_group do %>
+        <%= f.select :year, (Time.now.year-1..Time.now.year+1), label: "Select year", include_blank: "Choose the year" %>
+      <% end %>
+	    <%= f.form_group do %>
+	      <%= f.submit "Add Quarter", class: "btn btn-primary btn-lg" %>
+	    <% end %>
+	<% end %>
+</div>

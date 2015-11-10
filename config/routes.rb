@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   	get 'profile', on: :member
   	resources :meetings
   	resources :photos
+  	resources :quarters
   end
 
 end

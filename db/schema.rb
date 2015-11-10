@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151030173224) do
+ActiveRecord::Schema.define(version: 20151105150103) do
 
   create_table "meetings", force: true do |t|
     t.string   "subject"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 20151030173224) do
   end
 
   add_index "photos", ["user_id"], name: "index_photos_on_user_id"
+
+  create_table "quarters", force: true do |t|
+    t.integer "hours"
+    t.integer "quart"
+    t.integer "year"
+    t.integer "user_id"
+  end
+
+  add_index "quarters", ["user_id"], name: "index_quarters_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "DeviseCreateUsers",      default: "", null: false

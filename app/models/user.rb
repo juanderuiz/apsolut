@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   #Added by me
   #VALIDATIONS
-  #validates :name, :presence => true, :length => {:minimum => 3}
+  validates :name, :presence => true, :length => {:minimum => 3}
   #validates :bio, :length => {:maximum => 140}
   validates :email, :uniqueness => true
   #validates :datebirth, :presence => true
@@ -16,4 +16,5 @@ class User < ActiveRecord::Base
   #RELATIONSHIPS
   has_many :photos,  dependent: :destroy
   has_many :meetings
+  has_many :quarters, dependent: :destroy
 end
