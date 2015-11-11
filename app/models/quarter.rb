@@ -13,15 +13,25 @@ class Quarter < ActiveRecord::Base
   end
 
   def previous_quarter_is_created
-  	if (quart > 1)
-      quart_required = quart-1
-      logger.debug "Quart required -> #{quart_required}"
-      @previous_created = Quarter.where("quart = ? and year = ? and user_id = ?", quart_required, year, user_id)
-      logger.debug "Quart found -> #{@previous_created.size()}"
-      if (@previous_created.size() == 0)
-      	errors.add(:quart, 'Sorry! You have quarters to create BEFORE this one')
+    @user_quarters = Quarter.where("user_id = ?", user_id)
+    #if is the first quarter in the company... you can create it
+    unless (@user_quarters.size() == 0)
+  	  if (quart == 1)
+        quart_required = 4
+        year_required = year-1
+      else
+        quart_required = quart-1
+        year_required = year
       end
-    end 
+      if
+        logger.debug "Quart required -> #{quart_required} Year required -> #{year_required}"
+        @previous_created = Quarter.where("quart = ? and year = ? and user_id = ?", quart_required, year_required, user_id)
+        logger.debug "Quart found -> #{@previous_created.size()}"
+        if (@previous_created.size() == 0)
+      	  errors.add(:quart, 'Sorry! You have quarters to create BEFORE this one')
+        end
+      end 
+    end
   end
 
 end

@@ -1,7 +1,15 @@
-<%= link_to 'Booked Meetings', user_meetings_path(current_user) %>
-<h2>Dashboard</h2>
+<% if user_signed_in? %>
+  <div class="row">
+    <div class="col-sm-2 col-sm-offset-3">
+      <h4><%= link_to 'Booked Meetings', user_meetings_path(current_user) %></h4>
+    </div>
+    <div class="col-sm-2 col-sm-offset-1">
+      <h4><%= link_to 'New quarter', new_user_quarter_path(current_user) %>
+    </div>
+  </div>
+<% end %>
 
-<%= link_to 'New quarter', new_user_quarter_path(current_user) %>
+
 
 <div class="container-fluid ">
 
@@ -20,7 +28,7 @@
   <div class="bg-warning col-sm-2">
     <h2><%= "Q4" %></h2>
   </div>   
-  <div class="bg-primary col-sm-2">
+  <div class="bg-info col-sm-2">
     <h2><%= "Total" %></h2>
   </div>     
 </div>
@@ -48,11 +56,12 @@
             <% diff = quart.hours - 360 %>
             <% if diff >=0 %>
             <% style = "text-success" %>
+            <% diff = "+" + diff.to_s %>
             <% else %>
             <% style = "text-danger" %>
             <% end %>
             <div class="bg-warning col-sm-2">
-              <h4><strong><%= link_to quart.hours, edit_user_quarter_path(@owner, quart) %></strong>  <small class=<%= style %> ><%= quart.hours - 360 %></small></h4>
+              <h4><strong><%= link_to quart.hours, edit_user_quarter_path(@owner, quart) %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h4>
             </div>
           <% end %>
           <!-- Add Empty Quarters -->
@@ -61,8 +70,15 @@
               <h4><%= "---" %></h4>
             </div>
           <% end %>
-          <div class="bg-primary total_year col-sm-2">
-            <h4><%= @total.to_s %></h4>
+          <% diff = @total - 1440 %>
+            <% if diff >=0 %>
+            <% style = "text-success" %>
+            <% diff = "+" + diff.to_s %>
+            <% else %>
+            <% style = "text-danger" %>
+            <% end %>
+          <div class="bg-info total_year col-sm-2">
+            <h4><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h4>
           </div>
 </div>
       <% end %>
