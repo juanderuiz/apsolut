@@ -1,5 +1,5 @@
 class Photo < ActiveRecord::Base
-  has_attached_file :image, styles: { big: "800x800>", medium: "400x400>", thumb: "300x300>" },
+  has_attached_file :image, styles: { big: "800x800>", medium: "400x400>", thumb: "300x300>", mini: "120x120>" },
   default_url: "/images/:style/missing.png",
   :url  => ":s3_domain_url",
   :path => "public/system/photos/images/000/000/:id/:style_:basename.:extension",
