@@ -1,17 +1,6 @@
 
 <div class="col-sm-3 col-sm-offset-1 col-xs-3 bg-info text-center">
   	<h3>New Meeting</h3>
-  	<% if @meeting.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@meeting.errors.count, "error") %> prohibited this meeting from being saved:</h2>
-
-        <ul>
-          <% @meeting.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
 
 	<%= bootstrap_form_for([@user, @meeting]) do |f| %>
 	    <%= f.form_group do %>

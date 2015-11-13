@@ -49,10 +49,10 @@
           <% @index = 0 %>
 
 <div class="row text-center user_quarters">
-          <div class="col-sm-2">
+          <div class="col-sm-2 user_image">
             <% if @photo %>
                <% logger.debug "Photo Loaded -> #{@photo.id}" %>
-               <%= image_tag(@photo.image.url(:mini), :class => "user_image img-rounded img-responsive center-block") %>
+               <%= image_tag(@photo.image.url(:mini), :class => "img-rounded img-responsive center-block") %>
             <% else %>
               <h4><%= "No image" %></h4>
             <% end %> 

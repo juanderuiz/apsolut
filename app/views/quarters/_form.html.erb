@@ -1,17 +1,4 @@
-<div class="col-sm-3 col-sm-offset-1 col-xs-3 bg-info text-center">
-  	<h3>New Quarter</h3>
-  	<% if @quarter.errors.any? %>
-      <div id="error_explanation">
-        <h2><%= pluralize(@quarter.errors.count, "error") %> prohibited this quarter from being saved:</h2>
-
-        <ul>
-          <% @quarter.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-
+<div class="col-sm-4 col-sm-offset-4 bg-info text-center">
 	<%= bootstrap_form_for([@user, @quarter]) do |f| %>
       <div class="field">
         <% @users = User.all %>
