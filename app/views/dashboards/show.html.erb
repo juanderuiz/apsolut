@@ -10,13 +10,17 @@
 <% end %>
 
 
-
 <div class="container-fluid ">
 
 <!-- ROW Starts -->
 
 <div class="row text-center">
-  <div class="bg-primary col-sm-2 col-sm-offset-2">
+  <div class="col-sm-2">
+     <form>Select year:
+       <input id="current_year" type="number" name="current_year" min=<%= @years.first %> max=<%= @years.last %> step="1" value=<%= Time.now.year %> >
+     </form>
+  </div>
+  <div class="bg-primary col-sm-2">
     <h2><%= "Q1" %></h2>
   </div>
   <div class="bg-primary col-sm-2">
@@ -34,21 +38,25 @@
 </div>
 
 
-    <% @quarters.sort.each do |user, quarters| %>
-      <% @owner = User.find(user) %>
-      <% @photo = Photo.where('user_id = ?', @owner.id).last %>
-      <% logger.debug "User Loaded -> #{@owner.name}" %>
+<% @quarters.sort.each do |user, quarters| %>
+  <% @owner = User.find(user) %>
+  <% @photo = Photo.where('user_id = ?', @owner.id).last %>
+  <% logger.debug "User Loaded -> #{@owner.name}" %>
 
-      
+  <div class="row text-center user_quarters">    
   <% @quarters_by_year = quarters.group_by(&:year) %>
   <% @quarters_by_year.sort.each do |year, quarts| %>
-  <% @year = quarts.first.year %>
+  
+    <% @year = quarts.first.year %>
+    <% @quart_ready = quarts.size %>
+    <% @total = 0 %>
+    <% @index = 0 %>
 
-        <% @quart_ready = quarts.size %>
-          <% @total = 0 %>
-          <% @index = 0 %>
-
-<div class="row text-center user_quarters">
+    <% year_row_class = "class=" + @year.to_s %>
+    <% logger.debug "Class -> #{@year_row_class}" %>
+    <!-- Add QUARTERS FOR A CERTAIN YEAR -->
+    <div <%= year_row_class %> >
+          <!-- Add User image and name -->
           <div class="col-sm-2 user_image">
             <% if @photo %>
                <% logger.debug "Photo Loaded -> #{@photo.id}" %>
@@ -58,6 +66,7 @@
             <% end %> 
             <h4 class="bg-info"><%= @owner.name[0..22] %></h4>
           </div>
+          <!-- END Add User image and name -->
           <!-- Add Created Quarters -->
           <% for quart in quarts %>
             <% @index += 1 %>
@@ -73,12 +82,15 @@
               <h1 class="quarter_container"><strong><%= link_to quart.hours, edit_user_quarter_path(@owner, quart) %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h1>
             </div>
           <% end %>
+          <!-- END Add Quarters -->
           <!-- Add Empty Quarters -->
           <% for j in (@index+1)..4 %>
             <div class="col-sm-2">
               <h1 class="quarter_container"><%= "---" %></h1>
             </div>
           <% end %>
+          <!-- END Add Empty Quarters -->
+          <!-- Add Total Amount of year -->
           <% diff = @total - 1440 %>
             <% if diff >=0 %>
             <% style = "text-success" %>
@@ -89,9 +101,14 @@
           <div class="total_year col-sm-2">
             <h1 class="quarter_container"><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h1>
           </div>
-</div>
-      <% end %>
+          <!-- END Total Amount of year -->
+    </div>
+    <!-- END Add QUARTERS FOR A CERTAIN USER/YEAR -->
     <% end %>
+  </div>
+  <!-- END OF QUARTERS FOR A CERTAIN USER -->
+  
+<% end %>
 <!-- End of ROW -->
 </div>
 <!-- End of Container Fluid for Quarters -->
