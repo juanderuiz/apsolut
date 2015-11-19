@@ -9,8 +9,7 @@
   </div>
 <% end %>
 
-
-<div class="container-fluid ">
+<div class="container-fluid">
 
 <!-- ROW Starts -->
 
@@ -50,7 +49,7 @@
     <% @year = quarts.first.year %>
     <% @quart_ready = quarts.size %>
     <% @total = 0 %>
-    <% @index = 0 %>
+    <% @index = 1 %>
 
     <% year_row_class = "class=" + @year.to_s %>
     <% logger.debug "Class -> #{@year_row_class}" %>
@@ -64,40 +63,50 @@
             <% else %>
               <h4><%= "No image" %></h4>
             <% end %> 
-            <h4 class="bg-info"><%= @owner.name[0..22] %></h4>
+            <h4 class="bg-info"><%= link_to @owner.name[0..22], @owner %></h4>
           </div>
           <!-- END Add User image and name -->
-          <!-- Add Created Quarters -->
+          <% last_index = 0 %>
           <% for quart in quarts %>
-            <% @index += 1 %>
-            <% @total = @total + quart.hours %>
-            <% diff = quart.hours - 360 %>
-            <% if diff >=0 %>
-            <% style = "text-success" %>
-            <% diff = "+" + diff.to_s %>
-            <% else %>
-            <% style = "text-danger" %>
+            <% if quart.quart != last_index+1 %>
+              <% for j in (last_index+1)..(quart.quart-1) %>
+                <div class="col-sm-2">
+                  <h1 class="quarter_container">---</h1>
+                </div>
+              <% end %>
             <% end %>
-            <div class="col-sm-2">
-              <h1 class="quarter_container"><strong><%= link_to quart.hours, edit_user_quarter_path(@owner, quart) %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h1>
-            </div>
+              <!-- Add Existing Quarters -->
+              <% @total = @total + quart.hours %>
+              <% diff = quart.hours - 360 %>
+              <% if diff >=0 %>
+                <% style = "text-success" %>
+                <% diff = "+" + diff.to_s %>
+              <% else %>
+                <% style = "text-danger" %>
+              <% end %>
+              <div class="col-sm-2">
+                <h1 class="quarter_container"><strong><%= link_to quart.hours, edit_user_quarter_path(@owner, quart) %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h1>
+              </div>
+              <!-- END Add Existing Quarters -->
+            <% last_index = quart.quart %>
+            <% @index = quart.quart %>
           <% end %>
-          <!-- END Add Quarters -->
-          <!-- Add Empty Quarters -->
-          <% for j in (@index+1)..4 %>
-            <div class="col-sm-2">
-              <h1 class="quarter_container"><%= "---" %></h1>
-            </div>
+
+          <% if last_index !=4 %>
+            <% for j in (last_index+1)..4 %>
+              <div class="col-sm-2">
+                <h1 class="quarter_container">---</h1>
+              </div>
+            <% end %>
           <% end %>
-          <!-- END Add Empty Quarters -->
-          <!-- Add Total Amount of year -->
+          
           <% diff = @total - 1440 %>
-            <% if diff >=0 %>
+          <% if diff >=0 %>
             <% style = "text-success" %>
             <% diff = "+" + diff.to_s %>
-            <% else %>
+          <% else %>
             <% style = "text-danger" %>
-            <% end %>
+          <% end %>
           <div class="total_year col-sm-2">
             <h1 class="quarter_container"><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h1>
           </div>
@@ -114,22 +123,3 @@
 <!-- End of Container Fluid for Quarters -->
 
 
-<!-- ROW Starts -->
-<div class="row hidden">
-  <div id="orderquarters" class="col-xs-9 col-sm-6 col-sm-offset-1 bg-info text-center">
-  	<h3>Booked Quarters</h3>
-    <% @quarters.sort.each do |user, quarters| %>
-      <% @owner = User.find(user) %>
-      <h3 class="red text-center col-sm-6 col-sm-offset-3 col-xs-6 col-xs-3-offset">
-      	<%= @owner.name[0..22] %>
-      </h3>
-      
-      <% for quarter in quarters %>
-        <div class="quarter text-center col-sm-10 col-sm-offset-1 col-xs-10 col-xs-1-offset">
-          <p class="bg-warning"><%= quarter.quart %> - Hours <%= quarter.hours %> - Year: <%= quarter.year %></p>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-<!-- End of ROW -->

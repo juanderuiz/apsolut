@@ -14,7 +14,7 @@ class QuartersController < ApplicationController
   	      format.html { redirect_to root_url, notice: 'Quarter sucesfully added!' }
         else
           #format.html { redirect_to user_meetings_path, notice: 'Errors creating meeting' }
-          format.html { render action: 'edit' }
+          format.html { render action: 'new' }
         end
     end
   else

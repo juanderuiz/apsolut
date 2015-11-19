@@ -1,6 +1,6 @@
 class Quarter < ActiveRecord::Base
   validate :quarter_not_exists, on: [:create]
-  validate :previous_quarter_is_created, on: [:create, :update]
+  #validate :previous_quarter_is_created, on: [:create] #removed :update when changed the _editform.html.erb
 
   belongs_to :user
   validates :user, :year, :hours, :quart, presence: true
@@ -8,7 +8,7 @@ class Quarter < ActiveRecord::Base
   def quarter_not_exists
     @quarter_not_created = Quarter.where("quart = ? and year = ? and user_id = ?", quart, year, user_id)
     if (@quarter_not_created.size() > 0)
-      errors.add(:quart, 'Sorry! This quartet was previosly created!')
+      errors.add(:quart, 'Sorry! This quartet was previously created!')
     end
   end
 
