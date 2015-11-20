@@ -3,9 +3,11 @@
     <div class="col-sm-2 col-sm-offset-3">
       <h4><%= link_to 'Booked Meetings', user_meetings_path(current_user) %></h4>
     </div>
-    <div class="col-sm-2 col-sm-offset-1">
-      <h4><%= link_to 'New quarter', new_user_quarter_path(current_user) %>
-    </div>
+    <% if current_user.try(:admin?) %>
+      <div class="col-sm-2 col-sm-offset-1">
+        <h4><%= link_to 'New quarter', new_user_quarter_path(current_user) %>
+      </div>
+    <% end %>
   </div>
 <% end %>
 
@@ -92,7 +94,7 @@
                 <% style = "text-danger" %>
               <% end %>
               <div class="col-sm-3">
-                <h2 class="quarter_container"><strong><%= link_to quart.hours, edit_user_quarter_path(@owner, quart) %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h2>
+                <h2 class="quarter_container"><strong><%= link_or_not(@owner, quart) %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h2>
               </div>
               <!-- END Add Existing Quarters -->
             <% last_index = quart.quart %>
