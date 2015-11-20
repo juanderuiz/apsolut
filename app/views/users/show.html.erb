@@ -14,6 +14,7 @@
   <div class="row">
   	<!-- Table HEADER For Quarters -->
     <div class="col-sm-10 col-sm-offset-1 text-center">
+      <div class="row">
       <div class="bg-primary col-sm-2 col-sm-offset-2">
         <h2><%= "Q1" %></h2>
       </div>
@@ -29,12 +30,14 @@
       <div class="bg-primary col-sm-2">
         <h2><%= "Total" %></h2>
       </div>  
-    </div>   
+      </div>
+    </div>
+
   
   <div class="col-sm-10 col-sm-offset-1 text-center">
     <% @quarters_by_year = @quarters.group_by(&:year) %>
     <% @quarters_by_year.sort.each do |year, quarts| %>
-  
+      <div class="row">
       <% @year = quarts.first.year %>
       <% @quart_ready = quarts.size %>
       <% @total = 0 %>
@@ -52,7 +55,7 @@
             <% if quart.quart != last_index+1 %>
               <% for j in (last_index+1)..(quart.quart-1) %>
                 <div class="col-sm-2">
-                  <h1 class="quarter_container">---</h1>
+                  <h1 class="quarter_container_show">---</h1>
                 </div>
               <% end %>
             <% end %>
@@ -66,7 +69,7 @@
                 <% style = "text-danger" %>
               <% end %>
               <div class="col-sm-2">
-                <h1 class="quarter_container"><strong><%= quart.hours %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h1>
+                <h1 class="quarter_container_show"><strong><%= quart.hours %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h1>
               </div>
               <!-- END Add Existing Quarters -->
             <% last_index = quart.quart %>
@@ -76,7 +79,7 @@
           <% if last_index !=4 %>
             <% for j in (last_index+1)..4 %>
               <div class="col-sm-2">
-                <h1 class="quarter_container">---</h1>
+                <h1 class="quarter_container_show">---</h1>
               </div>
             <% end %>
           <% end %>
@@ -90,9 +93,10 @@
             <% style = "text-danger" %>
           <% end %>
           <div class="total_year col-sm-2">
-            <h1 class="quarter_container"><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h1>
+            <h1 class="quarter_container_show"><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h1>
           </div>
           <!-- END Total Amount of year -->
+        </div>
         </div>
         <!-- END Add QUARTERS FOR A YEAR -->
     <% end %>
