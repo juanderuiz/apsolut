@@ -8,17 +8,18 @@ class QuartersController < ApplicationController
 
     if @owner 
       @quarter = @owner.quarters.new(quarter_params)
-  	# Check fields
-    respond_to do |format|
+  	  # Check fields
+      respond_to do |format|
   	    if @quarter.save
   	      format.html { redirect_to root_url, notice: 'Quarter sucesfully added!' }
         else
           #format.html { redirect_to user_meetings_path, notice: 'Errors creating meeting' }
           format.html { render action: 'new' }
         end
+      end
+    else
+      #Do nothing
     end
-  else
-  end
   end
 
   def new
@@ -38,8 +39,16 @@ class QuartersController < ApplicationController
   end
 
   def update
+    @former_quarter = Quarter.where("quart = ? and year = ? and user_id = ?",
+              quarter_params[:quart], quarter_params[:year], @quarter.user_id).first
     respond_to do |format|
       if @quarter.update(quarter_params)
+        #Remove existing quarter if existed
+        if @former_quarter
+          if (@former_quarter.id != @quarter.id)
+            @former_quarter.destroy
+          end
+        end
         format.html { redirect_to root_url, notice: 'Quarter Updated!' }
         #format.json { head :no_content }
       else
@@ -50,7 +59,13 @@ class QuartersController < ApplicationController
   end
 
   def destroy
-    
+    respond_to do |format|
+     if @quarter.destroy
+       format.html { redirect_to root_url, notice: 'Quarter removed!' }
+     else
+       format.html { redirect_to root_url, notice: 'Something went wrong...'}
+     end
+    end 
   end
 
   private

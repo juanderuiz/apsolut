@@ -1,13 +1,5 @@
 <div class="col-sm-4 col-sm-offset-4 bg-info text-center">
 	<%= bootstrap_form_for([@user, @quarter]) do |f| %>
-      <div class="field">
-        <% @users = User.all %>
-        <% if @users.empty?%>
-          <%= f.label "No mates available" %>
-        <% else %>
-          <%= f.collection_select :user_id, @users, :id, :name, {prompt: "Select one"} %>  
-        <% end %>
-      </div>
 	    <%= f.form_group do %>
         <%= f.number_field :hours, label:"Booked hours", :placeholder => "Ej: 368" %>
       <% end %>
@@ -20,5 +12,6 @@
 	    <%= f.form_group do %>
 	      <%= f.submit "Edit Quarter", class: "btn btn-primary btn-lg" %>
 	    <% end %>
+      <%= link_to 'Delete', [@user, @quarter], method: :delete, data: {confirm: "Are you sure?"} %></li>
 	<% end %>
 </div>

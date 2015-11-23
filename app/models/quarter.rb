@@ -1,5 +1,5 @@
 class Quarter < ActiveRecord::Base
-  validate :quarter_not_exists, on: [:create, :update]
+  validate :quarter_not_exists, on: [:create]
   #validate :previous_quarter_is_created, on: [:create] #removed :update when changed the _editform.html.erb
 
   belongs_to :user
@@ -12,6 +12,7 @@ class Quarter < ActiveRecord::Base
     end
   end
 
+  #This validation is not being used
   def previous_quarter_is_created
     @user_quarters = Quarter.where("user_id = ?", user_id)
     #if is the first quarter in the company... you can create it
