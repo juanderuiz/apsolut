@@ -36,13 +36,20 @@ function start() {
       var graphs = document.getElementsByClassName('graph');
       for (j = 0; j < totales.length; j++){
         var totalString = $(totales[j]).text().split("-");
-        var totalValue = Math.floor(totalString[0]*100/1440);
+        if (totalString.length != 2){
+          totalString = $(totales[j]).text().split("+");
+        }
+        var totalValue = Math.floor((totalString[0]*100)/1440);
         //window.alert(totalValue);
         var t = radialProgress(graphs[j])
           .diameter(150)
           .value(totalValue)
           .render();
       }
+}
+
+function makeSmaller() {
+    $(this).css({ "background-color": "#cce", "border-left": "1px solid #ccc" });
 }
 
 function start2(){

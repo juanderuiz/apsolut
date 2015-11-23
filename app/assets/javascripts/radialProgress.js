@@ -25,7 +25,7 @@
 
 function radialProgress(parent) {
     var _data=null,
-        _duration= 2000,
+        _duration= 1500,
         _selection,
         _margin = {top:0, right:0, bottom:10, left:0},
         __width = 140,

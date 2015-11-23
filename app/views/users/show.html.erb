@@ -1,13 +1,13 @@
 <div class="container-fluid">
   <div class="row text-center">
-  	<div class="col-sm-4 col-sm-offset-4 user_image bg-info">
+  	<div class="col-sm-4 col-sm-offset-4 user_image">
       <% if @photo %>
         <% logger.debug "Photo Loaded -> #{@photo.id}" %>
         <%= image_tag(@photo.image.url(:medium), :class => "img-rounded img-responsive center-block") %> 
       <% else %>
         <h4><%= "No image" %></h4>
       <% end %> 
-      <h3 class="bg-info"><%= link_to @user.name[0..22], @user %></h3>
+      <h3><%= link_to @user.name[0..22], @user %></h3>
     </div>
   </div>
   <!-- Quarters INFO -->
@@ -69,7 +69,7 @@
                 <% style = "text-danger" %>
               <% end %>
               <div class="col-sm-2">
-                <h1 class="quarter_container_show"><strong><%= quart.hours %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h1>
+                <h1 class="quarter_container_show"><strong><%= link_or_not(current_user, quart) %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h1>
               </div>
               <!-- END Add Existing Quarters -->
             <% last_index = quart.quart %>

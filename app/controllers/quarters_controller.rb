@@ -49,7 +49,7 @@ class QuartersController < ApplicationController
             @former_quarter.destroy
           end
         end
-        format.html { redirect_to root_url, notice: 'Quarter Updated!' }
+        format.html { redirect_to @quarter.user, notice: 'Quarter Updated!' }
         #format.json { head :no_content }
       else
         format.html { render action: 'edit' }
