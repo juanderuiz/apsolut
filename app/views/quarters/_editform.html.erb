@@ -11,7 +11,12 @@
 	    <%= f.form_group do %>
         <%= f.number_field :hours, label:"Booked hours", :placeholder => "Ej: 368" %>
       <% end %>
-      
+      <%= f.form_group do %>
+        <%= f.select :quart, (1..4), label:"Which quarter?" %>
+      <% end %>
+      <%= f.form_group do %>
+        <%= f.select :year, (Time.now.year-1..Time.now.year+1), label: "Select year", include_blank: "Choose the year" %>
+      <% end %>
 	    <%= f.form_group do %>
 	      <%= f.submit "Edit Quarter", class: "btn btn-primary btn-lg" %>
 	    <% end %>

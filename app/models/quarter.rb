@@ -1,5 +1,5 @@
 class Quarter < ActiveRecord::Base
-  validate :quarter_not_exists, on: [:create]
+  validate :quarter_not_exists, on: [:create, :update]
   #validate :previous_quarter_is_created, on: [:create] #removed :update when changed the _editform.html.erb
 
   belongs_to :user
