@@ -1,1 +1,1 @@
-<p>About: <%= link_to meeting.subject, [@user, meeting] %> - Date: <%= meeting.day.strftime("%d/%m/%Y") %> - Start <%= meeting.start.strftime("at %I:%M%p") %> - Finish <%= meeting.finish.strftime("at %I:%M%p") %> - Room: <%= meeting.room %></p>
+<p>About: <%= link_to meeting.subject.upcase, [@user, meeting] %> - Date: <%= meeting.day.strftime("%d/%m/%Y") %> - Start <%= meeting.start.strftime("at %I:%M%p") %> - Finish <%= meeting.finish.strftime("at %I:%M%p") %> - Room: <%= meeting.room %></p>

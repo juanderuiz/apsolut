@@ -1,7 +1,7 @@
 <div class="row">
-  <div class="col-sm-4 col-sm-offset-4 bg-info text-center">
+  <div class="col-sm-4 col-sm-offset-4 meetingcolor text-center">
       <% @owner = User.find(@meeting.user_id) %>
-      <p>About: <%= link_to @meeting.subject, [@user, @meeting] %></p>
+      <p>About: <%= link_to @meeting.subject.upcase, [@user, @meeting] %></p>
       <p>Start: <%= @meeting.start.strftime("%H:%M %p") %></p>
       <p>Finish: <%= @meeting.finish.strftime("%H:%M %p") %></p>
       <p>Room: <%= @meeting.room %></p>
@@ -9,7 +9,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-sm-4 col-sm-offset-4 bg-info text-center">
+  <div class="col-sm-4 col-sm-offset-4 meetingcolor text-center">
         <ul class="list-inline">
           <% if current_user.id == @owner.id %>
             <li><%= link_to 'Edit', edit_user_meeting_path(@user, @meeting) %></li>

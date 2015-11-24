@@ -8,6 +8,7 @@ $(document).on('ready page:load',function(){
       }
     }
     start();
+    changeDashboardInfo();
 
     //Attach function for onChange event to show Quarters for a certain year
     //Hide or Show the correct ones MIRAR ESTO BIEN
@@ -28,6 +29,18 @@ $(document).on('ready page:load',function(){
     //start();
 
 });
+
+var myVar = setInterval(function(){ changeDashboardInfo() }, 60000);
+
+function stopDashboardInfo(){
+  clearInterval(myVar);
+}
+
+function changeDashboardInfo(){
+  $("#mainmeetings").toggleClass("hidden");
+  $(".tableheader").toggleClass("hidden");
+  $(".user_quarters").toggleClass("hidden");
+}
 
 function start() {
       var yearValue = $('#current_year').val();
