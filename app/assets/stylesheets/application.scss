@@ -31,8 +31,17 @@
 .user_quarters{
 }
 
+.main_links a{
+  color: #383838;
+}
+
 .tableheader{
   margin-bottom:1%;
+  background-color: #FF9E1C;
+}
+
+.user_header{
+  background-color: #FF9E1C;
 }
 
 .total_container{
@@ -45,6 +54,11 @@
 
 .user_image{
   padding-top: 2%;
+  color: #383838;
+}
+
+.user_image a{
+  color: #383838;
 }
 
 .navbar{
@@ -55,8 +69,20 @@
   padding-bottom:2%;
 }
 
+.navbar-right a{
+  color: #383838;
+}
+
 .nav{
   padding-top:1%;
+}
+
+.grey_header{
+  color: #383838;
+}
+
+.grey_header a {
+  color: #383838;
 }
 
 //D3 values
@@ -78,7 +104,7 @@
 
 .arc {
     stroke-weight:0.1;
-    fill: #4e8fff;
+    fill: #ff9e1c;
 }
 
 

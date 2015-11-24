@@ -25,7 +25,7 @@
 
 function radialProgress(parent) {
     var _data=null,
-        _duration= 1500,
+        _duration= 2000,
         _selection,
         _margin = {top:0, right:0, bottom:10, left:0},
         __width = 140,
@@ -115,7 +115,7 @@ function radialProgress(parent) {
                 .attr("y",_width/2+_fontSize/3)
                 .attr("x",_width/2)
                 .attr("cursor","pointer")
-                .attr("width",_width)
+                .attr("width",_width/1.3)
                 // .attr("x",(3*_fontSize/2))
                 .text(function (d) { return Math.round((_value-_minValue)/(_maxValue-_minValue)*100) + "%" })
                 .style("font-size",_fontSize+"px")
@@ -186,7 +186,8 @@ function radialProgress(parent) {
 
 
     function measure() {
-        _width=_diameter - _margin.right - _margin.left - _margin.top - _margin.bottom;
+        //The 1.25 value to reduce the size of the circle
+        _width=(_diameter - _margin.right - _margin.left - _margin.top - _margin.bottom)/1.25;
         _height=_width;
         _fontSize=_width*.2;
         _arc.outerRadius(_width/2);

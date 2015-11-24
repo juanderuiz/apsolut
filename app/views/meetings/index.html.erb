@@ -1,15 +1,19 @@
 <!-- ROW Starts -->
 <div class="row">
-  <div id="ordermeetings" class="col-xs-9 col-sm-6 col-sm-offset-1 bg-info text-center">
+  <div id="ordermeetings" class="col-sm-6 col-sm-offset-1 bg-info text-center">
   	<h3>Scheduled Meetings</h3>
-    <% @meetings_by_date.sort.each do |day, meetings| %>
-      <h3 class="text-center col-sm-4 col-sm-offset-4 col-xs-6 col-xs-3-offset"><%= day.strftime("%d/%m/%Y") %></h3>
+    <% @meetings_by_date.sort.each do |day, meetings_all| %>
+    <h3 class="text-center col-sm-4 col-sm-offset-4"><%= day.strftime("%d/%m/%Y") %></h3>
+     <% @meetings_for_room = meetings_all.group_by(&:room) %>
+     <% @meetings_for_room.sort.each do |room, meetings| %>
+      <h4 class="text-center col-sm-4 col-sm-offset-4"><%= "Room " + room.to_s %></h3>
       <% for meeting in meetings %>
         <% owner = User.find(meeting.user_id) %>
         <div class="meeting text-center col-sm-10 col-sm-offset-1 col-xs-10 col-xs-1-offset">
           <p class="bg-warning">About: <%= link_to meeting.subject, [@user, meeting] %> - Start <%= meeting.start.strftime("at %H:%M %p") %> - Finish <%= meeting.finish.strftime("at %H:%M %p") %><br>Room: <%= meeting.room %> - Owner: <%= owner.name %></p>
         </div>
       <% end %>
+     <% end %>
     <% end %>
   </div>
   <%= render 'form' %>

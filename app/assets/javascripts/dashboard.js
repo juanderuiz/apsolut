@@ -48,22 +48,4 @@ function start() {
       }
 }
 
-function makeSmaller() {
-    $(this).css({ "background-color": "#cce", "border-left": "1px solid #ccc" });
-}
-
-function start2(){
-  for (i = 0; i < quarters_year.length; i++) {
-        if ($(quarters_year[i]).hasClass(newValue.toString())) {
-          var total_cell = $(quarters_year[i]).children().last();
-          if ($(total_cell).hasClass('total_year')){
-            window.alert($(total_cell).text());
-            var rp1 = radialProgress($(total_cell))
-                .diameter(150)
-                .value(78)
-                .render();
-          }
-        }
-      }
-}
 
