@@ -11,38 +11,13 @@
   </div>
 <% end %>
 
-<div class="container-fluid">
-
+<div class="container-fluid hidden-lg">
+<p>Medium container</p>
 <!-- ROW Starts -->
 
-<div class="row text-center tableheader hidden">
-  <div class="col-sm-2">
-     <form class="grey_header">Select year:
-       <input id="current_year" type="number" name="current_year" min=<%= @years.first %> max=<%= @years.last %> step="1" value=<%= Time.now.year %> >
-     </form>
-  </div>
-  <div class="col-sm-6">
-    <div class="row">
-      <div class="col-sm-3">
-        <h2 class="grey_header"><%= "Q1" %></h2>
-      </div>
-      <div class="col-sm-3">
-        <h2 class="grey_header"><%= "Q2" %></h2>
-      </div>
-      <div class="col-sm-3">
-        <h2 class="grey_header"><%= "Q3" %></h2>
-      </div>
-      <div class="col-sm-3">
-        <h2 class="grey_header"><%= "Q4" %></h2>
-      </div>
-    </div>
-  </div>  
-  <div class="col-sm-4">
-    <h2 class="grey_header"><%= "Total" %></h2>
-  </div>     
-</div>
+<%= render 'tableheadersmall' %>
 
-
+<!-- Quarters for small and medium device -->
 <% @quarters.sort.each do |user, quarters| %>
   <% @owner = User.find(user) %>
   <% @photo = Photo.where('user_id = ?', @owner.id).last %>
@@ -136,28 +111,219 @@
   
 <% end %>
 <!-- End of ROW -->
+<!-- END Quarters for small and medium device -->
 
 <!-- ROW Starts -->
-<div id="mainmeetings" class="row">
-  <div id="ordermeetings" class="col-sm-8 col-sm-offset-2 text-center">
-    <h3>Scheduled Meetings</h3>
-    <% @meetings_by_date.sort.each do |day, meetings_all| %>
-    <h3 class="text-center col-sm-4 col-sm-offset-4"><%= day.strftime("%d/%m/%Y") %></h3>
-     <% @meetings_for_room = meetings_all.group_by(&:room) %>
-     <% @meetings_for_room.sort.each do |room, meetings| %>
-      <h4 class="text-center col-sm-4 col-sm-offset-4"><%= "Room " + room.to_s %></h3>
-      <% for meeting in meetings %>
-        <% owner = User.find(meeting.user_id) %>
-        <div class="meeting text-center col-sm-10 col-sm-offset-1 col-xs-10 col-xs-1-offset">
-          <p class="bg-warning">About: <%= meeting.subject.upcase %> - Start <%= meeting.start.strftime("at %H:%M %p") %> - Finish <%= meeting.finish.strftime("at %H:%M %p") %><br>Room: <%= meeting.room %> - Owner: <%= owner.name %></p>
-        </div>
-      <% end %>
-     <% end %>
-    <% end %>
-  </div>
-</div>
+<p>Medium meetings</p>
+<%= render 'mainmeetings' %>
 <!-- End of ROW -->
 </div>
 <!-- End of Container Fluid for Quarters -->
 
 
+<div class="container-fluid visible-lg">
+<p>Large container</p>
+<%= render 'tableheaderlarge' %>
+
+<div class="row">
+  <div class="col-lg-6">
+<!-- Users and Quarters for the first column -->
+<% @quarters.sort.each do |user, quarters| %>
+  <% @owner = User.find(user) %>
+  <% @photo = Photo.where('user_id = ?', @owner.id).last %>
+  <% logger.debug "User Loaded -> #{@owner.name}" %>
+
+  <div class="row text-center user_quarters hidden">    
+  <% @quarters_by_year = quarters.group_by(&:year) %>
+  <% @quarters_by_year.sort.each do |year, quarts| %>
+  
+    <% @year = quarts.first.year %>
+    <% @quart_ready = quarts.size %>
+    <% @total = 0 %>
+    <% @index = 1 %>
+
+    <% year_row_class = "class=" + @year.to_s %>
+    <% logger.debug "Class -> #{@year_row_class}" %>
+    <!-- Add QUARTERS FOR A CERTAIN YEAR -->
+    <div <%= year_row_class %> >
+          <!-- Add User image and name -->
+          <div class="col-lg-3 user_image">
+            <% if @photo %>
+               <% logger.debug "Photo Loaded -> #{@photo.id}" %>
+               <%= image_tag(@photo.image.url(:mini), :class => "img-rounded img-responsive center-block") %>
+            <% else %>
+              <h4><%= "No image" %></h4>
+            <% end %> 
+            <h4 class="grey_header"><%= link_to @owner.name[0..22], @owner %></h4>
+          </div>
+          <!-- END Add User image and name -->
+          <% last_index = 0 %>
+          <!-- col-sm-6 for 4 quarters -->
+          <div class="col-lg-6">
+          <div class="row">
+          <% for quart in quarts %>
+            <% if quart.quart != last_index+1 %>
+              <% for j in (last_index+1)..(quart.quart-1) %>
+                <div class="col-sm-3">
+                  <h2 class="quarter_container">---</h2>
+                </div>
+              <% end %>
+            <% end %>
+              <!-- Add Existing Quarters -->
+              <% @total = @total + quart.hours %>
+              <% diff = quart.hours - 360 %>
+              <% if diff >=0 %>
+                <% style = "text-success" %>
+                <% diff = "+" + diff.to_s %>
+              <% else %>
+                <% style = "text-danger" %>
+              <% end %>
+              <div class="col-lg-3">
+                <h3 class="quarter_container"><strong><%= link_or_not(@owner, quart) %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h3>
+              </div>
+              <!-- END Add Existing Quarters -->
+            <% last_index = quart.quart %>
+            <% @index = quart.quart %>
+          <% end %>
+ 
+          <% if last_index !=4 %>
+            <% for j in (last_index+1)..4 %>
+              <div class="col-lg-3">
+                <h2 class="quarter_container">---</h2>
+              </div>
+            <% end %>
+          <% end %>
+          </div>
+          </div> <!-- End of col-sm-6 for 4 quarters -->
+          <!-- Total Amount of year -->
+          <% diff = @total - 1440 %>
+          <% if diff >=0 %>
+            <% style = "text-success" %>
+            <% diff = "+" + diff.to_s %>
+          <% else %>
+            <% style = "text-danger" %>
+          <% end %>
+          <div class="total_year col-lg-3">
+            <div class="row">
+              <div class="col-lg-5">
+                <h2 class="total_container"><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h2>
+              </div>
+              <div class="col-lg-7 graph">
+              </div>
+            </div>   
+          </div>
+          <!-- END Total Amount of year -->
+    </div>
+    <!-- END Add QUARTERS FOR A CERTAIN USER/YEAR -->
+    <% end %>
+  </div>
+  <!-- END OF QUARTERS FOR A CERTAIN USER -->
+  
+<% end %>
+  </div> <!-- END col-lg-6 -->
+<!-- END Users and Quarters for the first column -->
+
+<!-- Users and Quarters for the SECOND column -->
+<div class="col-lg-6">
+<!-- Users and Quarters for the first column -->
+<% @quarters.sort.each do |user, quarters| %>
+  <% @owner = User.find(user) %>
+  <% @photo = Photo.where('user_id = ?', @owner.id).last %>
+  <% logger.debug "User Loaded -> #{@owner.name}" %>
+
+  <div class="row text-center user_quarters hidden">    
+  <% @quarters_by_year = quarters.group_by(&:year) %>
+  <% @quarters_by_year.sort.each do |year, quarts| %>
+  
+    <% @year = quarts.first.year %>
+    <% @quart_ready = quarts.size %>
+    <% @total = 0 %>
+    <% @index = 1 %>
+
+    <% year_row_class = "class=" + @year.to_s %>
+    <% logger.debug "Class -> #{@year_row_class}" %>
+    <!-- Add QUARTERS FOR A CERTAIN YEAR -->
+    <div <%= year_row_class %> >
+          <!-- Add User image and name -->
+          <div class="col-lg-3 user_image">
+            <% if @photo %>
+               <% logger.debug "Photo Loaded -> #{@photo.id}" %>
+               <%= image_tag(@photo.image.url(:mini), :class => "img-rounded img-responsive center-block") %>
+            <% else %>
+              <h4><%= "No image" %></h4>
+            <% end %> 
+            <h4 class="grey_header"><%= link_to @owner.name[0..22], @owner %></h4>
+          </div>
+          <!-- END Add User image and name -->
+          <% last_index = 0 %>
+          <!-- col-sm-6 for 4 quarters -->
+          <div class="col-lg-6">
+          <div class="row">
+          <% for quart in quarts %>
+            <% if quart.quart != last_index+1 %>
+              <% for j in (last_index+1)..(quart.quart-1) %>
+                <div class="col-sm-3">
+                  <h2 class="quarter_container">---</h2>
+                </div>
+              <% end %>
+            <% end %>
+              <!-- Add Existing Quarters -->
+              <% @total = @total + quart.hours %>
+              <% diff = quart.hours - 360 %>
+              <% if diff >=0 %>
+                <% style = "text-success" %>
+                <% diff = "+" + diff.to_s %>
+              <% else %>
+                <% style = "text-danger" %>
+              <% end %>
+              <div class="col-lg-3">
+                <h3 class="quarter_container"><strong><%= link_or_not(@owner, quart) %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h3>
+              </div>
+              <!-- END Add Existing Quarters -->
+            <% last_index = quart.quart %>
+            <% @index = quart.quart %>
+          <% end %>
+ 
+          <% if last_index !=4 %>
+            <% for j in (last_index+1)..4 %>
+              <div class="col-lg-3">
+                <h2 class="quarter_container">---</h2>
+              </div>
+            <% end %>
+          <% end %>
+          </div>
+          </div> <!-- End of col-sm-6 for 4 quarters -->
+          <!-- Total Amount of year -->
+          <% diff = @total - 1440 %>
+          <% if diff >=0 %>
+            <% style = "text-success" %>
+            <% diff = "+" + diff.to_s %>
+          <% else %>
+            <% style = "text-danger" %>
+          <% end %>
+          <div class="total_year col-lg-3">
+            <div class="row">
+              <div class="col-lg-5">
+                <h2 class="total_container"><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h2>
+              </div>
+              <div class="col-lg-7 graph">
+              </div>
+            </div>   
+          </div>
+          <!-- END Total Amount of year -->
+    </div>
+    <!-- END Add QUARTERS FOR A CERTAIN USER/YEAR -->
+    <% end %>
+  </div>
+  <!-- END OF QUARTERS FOR A CERTAIN USER -->
+  
+<% end %>
+  </div> <!-- END col-lg-6 -->
+<!-- END Users and Quarters for the SECOND column -->
+</div> <!-- END row -->
+
+<!-- ROW Starts -->
+<p>Large meetings</p>
+<%= render 'mainmeetings' %>
+<!-- End of ROW -->
+</div>

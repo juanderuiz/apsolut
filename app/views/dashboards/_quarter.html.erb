@@ -1,0 +1,49 @@
+<% if quart.quart != last_index+1 %>
+              <% for j in (last_index+1)..(quart.quart-1) %>
+                <div class="col-sm-3">
+                  <h2 class="quarter_container">---</h2>
+                </div>
+              <% end %>
+            <% end %>
+              <!-- Add Existing Quarters -->
+              <% @total = @total + quart.hours %>
+              <% diff = quart.hours - 360 %>
+              <% if diff >=0 %>
+                <% style = "text-success" %>
+                <% diff = "+" + diff.to_s %>
+              <% else %>
+                <% style = "text-danger" %>
+              <% end %>
+              <div class="col-sm-3">
+                <h2 class="quarter_container"><strong><%= link_or_not(@owner, quart) %></strong>  <small class=<%= style %> ><%= diff.to_s %></small></h2>
+              </div>
+              <!-- END Add Existing Quarters -->
+            <% last_index = quart.quart %>
+            <% @index = quart.quart %>
+          <% end %>
+ 
+          <% if last_index !=4 %>
+            <% for j in (last_index+1)..4 %>
+              <div class="col-sm-3">
+                <h2 class="quarter_container">---</h2>
+              </div>
+            <% end %>
+          <% end %>
+          </div>
+          </div> <!-- End of col-sm-6 for 4 quarters -->
+          <!-- Total Amount of year -->
+          <% diff = @total - 1440 %>
+          <% if diff >=0 %>
+            <% style = "text-success" %>
+            <% diff = "+" + diff.to_s %>
+          <% else %>
+            <% style = "text-danger" %>
+          <% end %>
+          <div class="total_year col-sm-4">
+            <div class="row">
+              <div class="col-sm-5 col-sm-offset-2">
+                <h1 class="total_container"><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h1>
+              </div>
+              <div class="col-sm-5 graph">
+              </div>
+            </div>

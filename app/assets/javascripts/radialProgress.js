@@ -187,7 +187,12 @@ function radialProgress(parent) {
 
     function measure() {
         //The 1.25 value to reduce the size of the circle
-        _width=(_diameter - _margin.right - _margin.left - _margin.top - _margin.bottom)/1.25;
+        var w = window.innerWidth;
+        if (w<1000){
+          _width=(_diameter - _margin.right - _margin.left - _margin.top - _margin.bottom)/1.25;
+        } else{
+          _width=(_diameter - _margin.right - _margin.left - _margin.top - _margin.bottom)/1.65;
+        }
         _height=_width;
         _fontSize=_width*.2;
         _arc.outerRadius(_width/2);

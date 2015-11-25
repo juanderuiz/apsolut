@@ -1,0 +1,58 @@
+<!-- 2 columns for Large Displays -->
+<div class="row text-center tableheader hidden">
+  <!-- First column -->
+  <div class="col-lg-6">
+    <div class="row">
+      <div class="col-lg-3">
+        <form class="grey_header">Select year:
+          <input id="current_year" type="number" name="current_year" min=<%= @years.first %> max=<%= @years.last %> step="1" value=<%= Time.now.year %> >
+        </form>
+      </div>
+      <div class="col-lg-6">
+        <div class="row">
+          <div class="col-lg-3">
+            <h2 class="grey_header"><%= "Q1" %></h2>
+          </div>
+          <div class="col-lg-3">
+            <h2 class="grey_header"><%= "Q2" %></h2>
+          </div>
+          <div class="col-lg-3">
+            <h2 class="grey_header"><%= "Q3" %></h2>
+          </div>
+          <div class="col-lg-3">
+            <h2 class="grey_header"><%= "Q4" %></h2>
+          </div>
+        </div>
+      </div>  
+      <div class="col-lg-2 col-lg-offset-1">
+        <h2 class="grey_header"><%= "Total" %></h2>
+      </div> 
+    </div>
+  </div>   
+  <!-- END of First Column --> 
+  <!-- Second column -->
+  <div class="col-lg-6">
+    <div class="row">
+      <div class="col-lg-6 col-lg-offset-3">
+        <div class="row">
+          <div class="col-lg-3">
+            <h2 class="grey_header"><%= "Q1" %></h2>
+          </div>
+          <div class="col-lg-3">
+            <h2 class="grey_header"><%= "Q2" %></h2>
+          </div>
+          <div class="col-lg-3">
+            <h2 class="grey_header"><%= "Q3" %></h2>
+          </div>
+          <div class="col-lg-3">
+            <h2 class="grey_header"><%= "Q4" %></h2>
+          </div>
+        </div>
+      </div>  
+      <div class="col-lg-3">
+        <h2 class="grey_header"><%= "Total" %></h2>
+      </div> 
+    </div>
+  </div>   
+  <!-- END of Second Column -->
+</div>

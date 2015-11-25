@@ -44,6 +44,8 @@ function changeDashboardInfo(){
 
 function start() {
       var yearValue = $('#current_year').val();
+      var size = $(document).width();
+      //window.alert(size);
       //var quarters_year = $(".user_quarters").children();
       var totales = document.getElementsByClassName('total_year');
       var graphs = document.getElementsByClassName('graph');
