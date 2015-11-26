@@ -12,7 +12,7 @@
 <% end %>
 
 <div class="container-fluid hidden-lg">
-<p>Medium container</p>
+
 <!-- ROW Starts -->
 
 <%= render 'tableheadersmall' %>
@@ -112,23 +112,18 @@
 <% end %>
 <!-- End of ROW -->
 <!-- END Quarters for small and medium device -->
-
-<!-- ROW Starts -->
-<p>Medium meetings</p>
-<%= render 'mainmeetings' %>
-<!-- End of ROW -->
 </div>
 <!-- End of Container Fluid for Quarters -->
 
-
+<!-- Container Fluid for LARGE DEVICES -->
 <div class="container-fluid visible-lg">
-<p>Large container</p>
+
 <%= render 'tableheaderlarge' %>
 
 <div class="row">
   <div class="col-lg-6">
 <!-- Users and Quarters for the first column -->
-<% @quarters.sort.each do |user, quarters| %>
+<% @quarters_fc.sort.each do |user, quarters| %>
   <% @owner = User.find(user) %>
   <% @photo = Photo.where('user_id = ?', @owner.id).last %>
   <% logger.debug "User Loaded -> #{@owner.name}" %>
@@ -152,9 +147,9 @@
                <% logger.debug "Photo Loaded -> #{@photo.id}" %>
                <%= image_tag(@photo.image.url(:mini), :class => "img-rounded img-responsive center-block") %>
             <% else %>
-              <h4><%= "No image" %></h4>
+              <h5><%= "No image" %></h5>
             <% end %> 
-            <h4 class="grey_header"><%= link_to @owner.name[0..22], @owner %></h4>
+            <h5 class="grey_header"><%= link_to @owner.name[0..22], @owner %></h5>
           </div>
           <!-- END Add User image and name -->
           <% last_index = 0 %>
@@ -164,7 +159,7 @@
           <% for quart in quarts %>
             <% if quart.quart != last_index+1 %>
               <% for j in (last_index+1)..(quart.quart-1) %>
-                <div class="col-sm-3">
+                <div class="col-lg-3">
                   <h2 class="quarter_container">---</h2>
                 </div>
               <% end %>
@@ -189,7 +184,7 @@
           <% if last_index !=4 %>
             <% for j in (last_index+1)..4 %>
               <div class="col-lg-3">
-                <h2 class="quarter_container">---</h2>
+                <h3 class="quarter_container">---</h3>
               </div>
             <% end %>
           <% end %>
@@ -206,7 +201,7 @@
           <div class="total_year col-lg-3">
             <div class="row">
               <div class="col-lg-5">
-                <h2 class="total_container"><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h2>
+                <h3 class="total_container"><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h3>
               </div>
               <div class="col-lg-7 graph">
               </div>
@@ -226,7 +221,7 @@
 <!-- Users and Quarters for the SECOND column -->
 <div class="col-lg-6">
 <!-- Users and Quarters for the first column -->
-<% @quarters.sort.each do |user, quarters| %>
+<% @quarters_sc.sort.each do |user, quarters| %>
   <% @owner = User.find(user) %>
   <% @photo = Photo.where('user_id = ?', @owner.id).last %>
   <% logger.debug "User Loaded -> #{@owner.name}" %>
@@ -250,9 +245,9 @@
                <% logger.debug "Photo Loaded -> #{@photo.id}" %>
                <%= image_tag(@photo.image.url(:mini), :class => "img-rounded img-responsive center-block") %>
             <% else %>
-              <h4><%= "No image" %></h4>
+              <h5><%= "No image" %></h5>
             <% end %> 
-            <h4 class="grey_header"><%= link_to @owner.name[0..22], @owner %></h4>
+            <h5 class="grey_header"><%= link_to @owner.name[0..22], @owner %></h5>
           </div>
           <!-- END Add User image and name -->
           <% last_index = 0 %>
@@ -262,8 +257,8 @@
           <% for quart in quarts %>
             <% if quart.quart != last_index+1 %>
               <% for j in (last_index+1)..(quart.quart-1) %>
-                <div class="col-sm-3">
-                  <h2 class="quarter_container">---</h2>
+                <div class="col-lg-3">
+                  <h3 class="quarter_container">---</h3>
                 </div>
               <% end %>
             <% end %>
@@ -287,7 +282,7 @@
           <% if last_index !=4 %>
             <% for j in (last_index+1)..4 %>
               <div class="col-lg-3">
-                <h2 class="quarter_container">---</h2>
+                <h3 class="quarter_container">---</h3>
               </div>
             <% end %>
           <% end %>
@@ -304,7 +299,7 @@
           <div class="total_year col-lg-3">
             <div class="row">
               <div class="col-lg-5">
-                <h2 class="total_container"><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h2>
+                <h3 class="total_container"><strong><%= @total.to_s %></strong> <small class=<%= style %> ><%= diff.to_s %></small></h3>
               </div>
               <div class="col-lg-7 graph">
               </div>
@@ -322,8 +317,7 @@
 <!-- END Users and Quarters for the SECOND column -->
 </div> <!-- END row -->
 
-<!-- ROW Starts -->
-<p>Large meetings</p>
-<%= render 'mainmeetings' %>
-<!-- End of ROW -->
 </div>
+<!-- END Container Fluid for LARGE DEVICES -->
+
+<%= render 'mainmeetings' %>

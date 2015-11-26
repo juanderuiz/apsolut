@@ -1,9 +1,12 @@
 $(document).on('ready page:load',function(){
     
-    var inputValue = $('#current_year').val();
+    //When starting or reloading... set the quarters of current year
+    var inputValue = new Date().getFullYear();
+    $('.current_year').val(inputValue);
+    $('.current_year_lg').val(inputValue);
     var quarters_year = $(".user_quarters").children();
     for (i = 0; i < quarters_year.length; i++) {
-      if (!$(quarters_year[i]).hasClass(inputValue.toString())) {
+      if (!$(quarters_year[i]).hasClass(inputValue)) {
         $(quarters_year[i]).addClass("hidden");
       }
     }
@@ -11,13 +14,27 @@ $(document).on('ready page:load',function(){
     changeDashboardInfo();
 
     //Attach function for onChange event to show Quarters for a certain year
-    //Hide or Show the correct ones MIRAR ESTO BIEN
-    $('#current_year').click(function(){
-      var newValue = $('#current_year').val();
-      var current_quarters_year = $(".user_quarters").children();
+    //Small and Medium Devices
+    $('.current_year').click(function(){
+      var newValue = $('.current_year').val();
+      var quarters_year = $(".user_quarters").children();
       for (i = 0; i < quarters_year.length; i++) {
         if (!$(quarters_year[i]).hasClass(newValue.toString())) {
-      	  //window.alert(quarters_year[i]);
+          $(quarters_year[i]).addClass("hidden");
+        } else {
+          $(quarters_year[i]).removeClass("hidden");
+        }
+      }
+      start();
+    });
+
+    //Attach function for onChange event to show Quarters for a certain year
+    //LG Devices
+    $('.current_year_lg').click(function(){
+      var newValue = $('.current_year_lg').val();
+      var quarters_year = $(".user_quarters").children();
+      for (i = 0; i < quarters_year.length; i++) {
+        if (!$(quarters_year[i]).hasClass(newValue.toString())) {
           $(quarters_year[i]).addClass("hidden");
         } else {
           $(quarters_year[i]).removeClass("hidden");
