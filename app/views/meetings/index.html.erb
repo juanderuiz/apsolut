@@ -3,7 +3,7 @@
   <div id="ordermeetings" class="col-sm-6 col-sm-offset-1 bg-info text-center">
   	<h3>Scheduled Meetings</h3>
     <% @meetings_by_date.sort.each do |day, meetings_all| %>
-    <h3 class="text-center col-sm-4 col-sm-offset-4"><%= day.strftime("%d/%m/%Y") %></h3>
+    <h4 class="text-center col-sm-4 col-sm-offset-4"><%= day.strftime("%d/%m/%Y") %></h4>
      <% @meetings_for_room = meetings_all.group_by(&:room) %>
      <% @meetings_for_room.sort.each do |room, meetings| %>
       <h4 class="text-center col-sm-4 col-sm-offset-4"><%= "Room " + room.to_s %></h3>

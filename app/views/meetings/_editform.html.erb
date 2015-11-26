@@ -11,7 +11,7 @@
       <% end %>
 	    <%= f.time_field :start %>
 	    <%= f.time_field :finish %>
-	    <%= f.text_field :room %>
+	    <%= f.select :room, ['Big', 'Small', 'Kitchen'] %>
 	    <%= f.form_group do %>
 	      <%= f.submit "Add Meeting", class: "btn btn-primary btn-lg" %>
 	    <% end %>
