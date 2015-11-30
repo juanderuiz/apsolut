@@ -1,4 +1,4 @@
-<div class="col-sm-4 col-sm-offset-4 bg-info text-center">
+<div class="col-sm-4 col-sm-offset-4 meetingcolor text-center">
 	<%= bootstrap_form_for([@user, @quarter]) do |f| %>
 	    <%= f.form_group do %>
         <%= f.number_field :hours, label:"Booked hours", :placeholder => "Ej: 368" %>
@@ -12,6 +12,8 @@
 	    <%= f.form_group do %>
 	      <%= f.submit "Edit Quarter", class: "btn btn-primary btn-lg" %>
 	    <% end %>
-      <%= link_to 'Delete', [@user, @quarter], method: :delete, data: {confirm: "Are you sure?"} %></li>
+      <%= f.form_group do %>
+        <%= link_to 'Delete?', [@user, @quarter], method: :delete, data: {confirm: "Are you sure?"} %></li>
+      <% end %>
 	<% end %>
 </div>

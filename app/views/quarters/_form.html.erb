@@ -1,9 +1,16 @@
-<div class="col-sm-4 col-sm-offset-4 bg-info text-center">
+<% if !@user.try(:admin?) %>
+  <% @users = User.where('id = ?', @user.id) %>
+<% else %>
+  <% @users = User.all %>
+<% end %>
+
+<div class="col-sm-4 col-sm-offset-4 meetingcolor text-center">
 	<%= bootstrap_form_for([@user, @quarter]) do |f| %>
-      <div class="field">
-        <% @users = User.all %>
-        <% if @users.empty?%>
+      <div class="field">   
+        <% if @users.empty? %>
           <%= f.label "No mates available" %>
+        <% elsif (@users.length ==1) %>
+          <%= f.collection_select :user_id, @users, :id, :name %>
         <% else %>
           <%= f.collection_select :user_id, @users, :id, :name, {prompt: "Select one"} %>  
         <% end %>

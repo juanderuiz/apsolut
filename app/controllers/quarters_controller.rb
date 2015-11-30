@@ -11,7 +11,7 @@ class QuartersController < ApplicationController
   	  # Check fields
       respond_to do |format|
   	    if @quarter.save
-  	      format.html { redirect_to root_url, notice: 'Quarter sucesfully added!' }
+  	      format.html { redirect_to @quarter.user, notice: 'Quarter sucesfully added!' }
         else
           #format.html { redirect_to user_meetings_path, notice: 'Errors creating meeting' }
           format.html { render action: 'new' }
@@ -61,9 +61,9 @@ class QuartersController < ApplicationController
   def destroy
     respond_to do |format|
      if @quarter.destroy
-       format.html { redirect_to root_url, notice: 'Quarter removed!' }
+       format.html { redirect_to @quarter.user, notice: 'Quarter removed!' }
      else
-       format.html { redirect_to root_url, notice: 'Something went wrong...'}
+       format.html { redirect_to @quarter.user, notice: 'Something went wrong...'}
      end
     end 
   end

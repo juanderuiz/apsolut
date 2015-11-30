@@ -1,10 +1,10 @@
 <div class="container-fluid">
   <div class="row text-center">
-  	<div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2 user_image">
+  	<div class="col-sm-4 col-sm-offset-4 col-xs-8 col-xs-offset-2">
       <% if @photo %>
         <% logger.debug "Photo Loaded -> #{@photo.id}" %>
-        <%= image_tag(@photo.image.url(:medium), :class => "img-rounded img-responsive center-block visible hidden-xs") %>
-        <%= image_tag(@photo.image.url(:mini), :class => "img-rounded img-responsive center-block visible visible-xs") %> 
+        <%= image_tag(@photo.image.url(:thumb), :class => "img-rounded img-responsive center-block hidden-xs hidden-sm") %>
+        <%= image_tag(@photo.image.url(:mini), :class => "img-rounded img-responsive center-block visible-xs visible-sm") %> 
       <% else %>
         <h4><%= "No image" %></h4>
       <% end %> 
@@ -12,6 +12,12 @@
       <h5 class="visible-xs"><%= @user.name[0..22] %></h5>
       <h3 class="hidden-xs envelope"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><%= mail_to @user.email, " Send an email!" %></h3>
       <h5 class="visible-xs envelope"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span><%= mail_to @user.email, " Send an email!" %></h5>
+      <!-- New quarter option for admin -->
+      <% if current_user.try(:admin?) %>
+      <h3 class="hidden-xs"><%= link_to 'New quarter', new_user_quarter_path(@user) %></h3>
+      <h5 class="visible-xs"><%= link_to 'New quarter', new_user_quarter_path(@user) %></h5>
+    <% end %>
+    <!-- End options for admin -->
     </div>
   </div>
   <!-- Quarters INFO -->

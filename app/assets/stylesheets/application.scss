@@ -54,6 +54,7 @@
 
 .total_container{
   padding-top:8%;
+  color: #FF9E1C;
 }
 
 .quarter_container{
@@ -61,8 +62,12 @@
 }
 
 .user_image{
-  padding-top: 2%;
   color: #383838;
+}
+
+.user_image img{
+  width:  120px;
+  height: 120px;
 }
 
 .user_image a{
