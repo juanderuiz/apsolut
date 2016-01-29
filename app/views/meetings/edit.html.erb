@@ -1,3 +1,5 @@
+<% @meetings = Meeting.where("day >= ?", Date.today) %>
+<% @meetings_by_date = @meetings.order(:day, :start).group_by(&:day) %>
 <!-- ROW Starts -->
 <div class="row">
   <div id="ordermeetings" class="col-sm-6 col-sm-offset-1 bg-info text-center">

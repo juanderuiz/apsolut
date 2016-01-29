@@ -27,12 +27,9 @@ class Meeting < ActiveRecord::Base
           overlap = false
         else
           overlap = true
-          if (finish > mtng.start)
-            errors.add(:finish, 'Sorry! It overlaps ' + (mtng.subject).upcase + ' meeting')
-          else
-            errors.add(:start, 'Sorry! It overlaps ' + (mtng.subject).upcase + ' meeting')
-          end
-          break
+          errors.add(:finish, 'Sorry! It overlaps ' + (mtng.subject).upcase + ' meeting')
+          errors.add(:start, 'Sorry! It overlaps ' + (mtng.subject).upcase + ' meeting')
+          break #if overlap, finish the loop
         end
       end
     end

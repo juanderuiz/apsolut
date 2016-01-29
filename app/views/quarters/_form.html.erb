@@ -1,6 +1,8 @@
 <% if !@user.try(:admin?) %>
+  <!-- The admin clicked in a profile page -->
   <% @users = User.where('id = ?', @user.id) %>
 <% else %>
+  <!-- The admin clicked in the dashboard page -->
   <% @users = User.all %>
 <% end %>
 
