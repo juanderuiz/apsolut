@@ -34,7 +34,7 @@
 <div class="col-sm-4 col-sm-1 text-center">
   <% @photos = current_user.photos %>
   <% @photo = @photos.last %>
-  <% @default_image = Photo.find(0) %>
+  <% #@default_image = Photo.find(0) %>
     <% if @photo.blank? %>
       <h5>Default image</h5>
       <!--<%= image_tag(@default_image.image.url(:thumb)) %>-->
