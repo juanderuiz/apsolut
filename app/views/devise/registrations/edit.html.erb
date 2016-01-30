@@ -37,9 +37,9 @@
   <% #@default_image = Photo.find(0) %>
     <% if @photo.blank? %>
       <h5>Default image</h5>
-      <!--<%= image_tag(@default_image.image.url(:thumb)) %>-->
+      <%= #image_tag(@default_image.image.url(:thumb)) %>
     <% else %> 
-      <%= image_tag(@photo.image.url(:thumb)) %>
+      <%= #image_tag(@photo.image.url(:thumb)) %>
     <% end %>
     <h5><%= link_to "Upload photo", new_user_photo_path(current_user) %></h5>
 </div>
