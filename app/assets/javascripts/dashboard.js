@@ -2,8 +2,8 @@ $(document).on('ready page:load',function(){
     
     //When starting or reloading... set the quarters of current year
     var inputValue = new Date().getFullYear();
-    $('.current_year').val(inputValue);
-    $('.current_year_lg').val(inputValue);
+    $('.current_year').val(inputValue-1);
+    $('.current_year_lg').val(inputValue-1);
     var quarters_year = $(".user_quarters").children();
     for (i = 0; i < quarters_year.length; i++) {
       if (!$(quarters_year[i]).hasClass(inputValue)) {
