@@ -32,19 +32,10 @@
   </div>
 
 <div class="col-sm-4 col-sm-1 text-center">
-  <% @photos = current_user.photos %>
-  <% @photo = @photos.last %>
-  <% #@default_image = Photo.find(0) %>
-    <% if @photo.blank? %>
-      <h5>Default image</h5>
-      <%= #image_tag(@default_image.image.url(:thumb)) %>
-    <% else %> 
-      <%= #image_tag(@photo.image.url(:thumb)) %>
-    <% end %>
     <h5><%= link_to "Upload photo", new_user_photo_path(current_user) %></h5>
 </div>
 
 
-<%= #link_to "Back", :back %>
+<%= link_to "Back", :back %>
 
 </div>
