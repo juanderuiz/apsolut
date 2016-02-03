@@ -48,7 +48,7 @@ $(document).on('ready page:load',function(){
 });
 
 var windowReload = 0;
-var myVar = setInterval(function(){ changeDashboardInfo(); }, 5000);
+var myVar = setInterval(function(){ changeDashboardInfo(); }, 30000);
 
 
 function stopDashboardInfo(){
