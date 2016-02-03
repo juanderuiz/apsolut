@@ -1,6 +1,6 @@
 $(document).on('ready page:load',function(){
     
-    //When starting or reloading... set the quarters of current year
+    //When starting or reloading... set the quarters of previous year
     var inputValue = new Date().getFullYear()-1;
     $('.current_year').val(inputValue);
     $('.current_year_lg').val(inputValue);
@@ -57,6 +57,7 @@ function changeDashboardInfo(){
   $("#mainmeetings").toggleClass("hidden");
   $(".tableheader").toggleClass("hidden");
   $(".user_quarters").toggleClass("hidden");
+  location.reload(true);
 }
 
 function start() {
