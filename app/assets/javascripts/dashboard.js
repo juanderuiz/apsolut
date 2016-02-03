@@ -47,23 +47,22 @@ $(document).on('ready page:load',function(){
 
 });
 
-var myVar = setTimeout(function(){ changeDashboardInfo() }, 10000);
+var windowReload = 0;
+var myVar = setInterval(function(){ changeDashboardInfo(); }, 5000);
+
 
 function stopDashboardInfo(){
   clearInterval(myVar);
 }
 
 function changeDashboardInfo(){
+  windowReload++;
+  if (windowReload==4){
+    location.reload(true);
+  }
   $("#mainmeetings").toggleClass("hidden");
   $(".tableheader").toggleClass("hidden");
   $(".user_quarters").toggleClass("hidden");
-  delay(10000);
-  reloadDashboard();
-  //location.reload(true);
-}
-
-function reloadDashboard(){
-  location.reload(true);
 }
 
 function start() {
