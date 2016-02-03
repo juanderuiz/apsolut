@@ -10,7 +10,7 @@ class DashboardsController < ApplicationController
     consultants = User.where(:admin => false).order(name: :desc)
     total = consultants.count
     half = total/2
-    if (total_users.modulo(2))>0 
+    if (total.modulo(2))>0 
       @users_fc = consultants.select("id").first(half+1) #Users for first column LG device
       @users_sc = consultants.select("id").last(half) #Users for second column
     else
