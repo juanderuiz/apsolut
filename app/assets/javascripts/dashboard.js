@@ -47,7 +47,7 @@ $(document).on('ready page:load',function(){
 
 });
 
-var myVar = setTimeout(function(){ changeDashboardInfo() }, 10000);
+var myVar = setTimeout(function(){ changeDashboardInfo(); location.reload(true); }, 10000);
 
 function stopDashboardInfo(){
   clearInterval(myVar);
@@ -57,8 +57,8 @@ function changeDashboardInfo(){
   $("#mainmeetings").toggleClass("hidden");
   $(".tableheader").toggleClass("hidden");
   $(".user_quarters").toggleClass("hidden");
-  delay(15000);
-  location.reload(true);
+  delay(10000);
+  //location.reload(true);
 }
 
 function start() {
