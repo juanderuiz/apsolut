@@ -47,14 +47,13 @@ $(document).on('ready page:load',function(){
 
 });
 
-var myVar = setInterval(function(){ changeDashboardInfo(); }, 60000);
+var myVar = setTimeout(function(){ location.reload(true) }, 60000);
 
 function stopDashboardInfo(){
   clearInterval(myVar);
 }
 
 function changeDashboardInfo(){
-  location.reload(true);
   $("#mainmeetings").toggleClass("hidden");
   $(".tableheader").toggleClass("hidden");
   $(".user_quarters").toggleClass("hidden");
