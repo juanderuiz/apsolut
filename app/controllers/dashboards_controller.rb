@@ -7,14 +7,15 @@ class DashboardsController < ApplicationController
     @meetings_by_date = @meetings.order(:day, :start).group_by(&:day)
 
     #total_users = User.count
-    total_users = User.where(:admin => false).order(name: :desc).count
-    half = total_users/2
+    consultants = User.where(:admin => false).order(name: :desc)
+    total = consultants.count
+    half = total/2
     if (total_users.modulo(2))>0 
-      @users_fc = User.select("id").first(half+1) #Users for first column LG device
-      @users_sc = User.select("id").last(half) #Users for second column
+      @users_fc = consultants.select("id").first(half+1) #Users for first column LG device
+      @users_sc = consultants.select("id").last(half) #Users for second column
     else
-      @users_fc = User.select("id").first(half) #Users for first column LG device
-      @users_sc = User.select("id").last(half) #Users for second column
+      @users_fc = consultants.select("id").first(half) #Users for first column LG device
+      @users_sc = consultants.select("id").last(half) #Users for second column
     end
     
     #@users_fc = User.select("id").first(total_users) #Users for first column LG device
