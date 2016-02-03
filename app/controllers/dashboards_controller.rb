@@ -10,10 +10,10 @@ class DashboardsController < ApplicationController
     total_users = User.where(:admin => false).order(name: :desc).count
     half = total_users/2
     if (total_users.modulo(2))>0 
-      @users_fc = User.select("id").first(half) #Users for first column LG device
+      @users_fc = User.select("id").first(half+1) #Users for first column LG device
       @users_sc = User.select("id").last(half) #Users for second column
     else
-      @users_fc = User.select("id").first(half+1) #Users for first column LG device
+      @users_fc = User.select("id").first(half) #Users for first column LG device
       @users_sc = User.select("id").last(half) #Users for second column
     end
     
