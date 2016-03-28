@@ -1,4 +1,6 @@
 class DashboardsController < ApplicationController
+  before_action :authenticate_user
+
   def show
   	@quarters = Quarter.all.order(:year, :quart).group_by(&:user_id)
   	@years = Quarter.uniq.pluck(:year).sort
