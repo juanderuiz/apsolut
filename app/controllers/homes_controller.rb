@@ -1,5 +1,5 @@
 class HomesController < ApplicationController
-  before_action :authenticate_user!	
+  before_filter :authenticate_user!	
   before_filter :check_user_signed_in
 
   def show

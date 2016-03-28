@@ -1,5 +1,5 @@
 class MeetingsController < ApplicationController
-  before_action :authenticate_user!
+  before_filter :authenticate_user!
   before_action :get_user
   before_action :get_meeting, only: [:show, :edit, :destroy, :update]
   #Need to validate that a meeting is not overlapping another one
