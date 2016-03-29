@@ -11,6 +11,8 @@
   </div>
 <% end %>
 
+<% if user_signed_in? %>
+
 <div class="container-fluid hidden-lg">
 
 <!-- ROW Starts -->
@@ -321,3 +323,5 @@
 <!-- END Container Fluid for LARGE DEVICES -->
 
 <%= render 'mainmeetings' %>
+
+<% end %>
