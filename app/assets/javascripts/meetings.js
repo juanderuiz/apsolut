@@ -4,7 +4,7 @@ $(document).on('ready page:load',function(){
     dateFormat: "yy-mm-dd"
   });
   
-}
+});
 
 //jQuery ->
   //$('#meeting_day').datepicker
