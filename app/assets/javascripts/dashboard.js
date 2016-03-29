@@ -1,4 +1,6 @@
 $(document).on('ready page:load',function(){
+
+    console.log("Main page...");
     
     //When starting or reloading... set the quarters of previous year
     var inputValue = new Date().getFullYear()-1;
@@ -66,6 +68,7 @@ function changeDashboardInfo(){
 }
 
 function start() {
+      console.log("Start method");
       var yearValue = $('#current_year').val();
       var size = $(document).width();
       //window.alert(size);
