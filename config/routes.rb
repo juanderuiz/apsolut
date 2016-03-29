@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   #devise_for :users
   devise_for :users, :controllers => { registrations: 'registrations' }
 
-  root 'devise/sessions#new'
+  devise_scope :user do
+    get "/login" => "devise/sessions#new"
+  end
+
+  root 'login'
 
   resource :dashboard, only: [:show]
 
