@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
-  #before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def show
   	@quarters = Quarter.all.order(:year, :quart).group_by(&:user_id)
