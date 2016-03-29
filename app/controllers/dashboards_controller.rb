@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authorize
 
   def show
   	@quarters = Quarter.all.order(:year, :quart).group_by(&:user_id)
@@ -25,4 +25,5 @@ class DashboardsController < ApplicationController
     @quarters_fc = Quarter.where(user_id: @users_fc).order(:year, :quart).group_by(&:user_id)
     @quarters_sc = Quarter.where(user_id: @users_sc).order(:year, :quart).group_by(&:user_id)
   end
+
 end
