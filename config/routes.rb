@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     get "/login" => "devise/sessions#new"
   end
 
-  root 'login'
+  root 'homes#show'
 
   resource :dashboard, only: [:show]
 
