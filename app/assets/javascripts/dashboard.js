@@ -54,10 +54,12 @@ var myVar = setInterval(function(){ changeDashboardInfo(); }, 40000);
 
 
 function stopDashboardInfo(){
+  console.log("stopDashboardInfo method");
   clearInterval(myVar);
 }
 
 function changeDashboardInfo(){
+  console.log("changeDashboardInfo");
   windowReload++;
   if (windowReload==4){
     location.reload(true);
