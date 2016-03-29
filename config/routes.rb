@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   #devise_for :users
   devise_for :users, :controllers => { registrations: 'registrations' }
 
-  root 'dashboards#show', via: :get
+  root 'dashboards#show' #, via: :get
 
   resource :dashboard, only: [:show]
 
