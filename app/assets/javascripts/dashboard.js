@@ -2,6 +2,7 @@ $(".dashboards.show").on('ready',function(){
 
     console.log("Main page...");
     var tables = $('#smalltable').length + $('#largetable').length;
+    console.log("Tables ->" + tables);
     if (tables<2) { return; }
   
     
