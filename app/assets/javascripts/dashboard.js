@@ -1,6 +1,6 @@
 console.log("Entering Dashboard.js");
 
-$(document).on('page:change',function(){
+$(document).on('ready',function(){
 
     console.log("Main page...");
     var tables = $('#smalltable').length + $('#largetable').length;
