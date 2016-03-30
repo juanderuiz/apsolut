@@ -1,3 +1,5 @@
+console.log("Entering Dashboard.js");
+
 $(".dashboards.show").on('page:change',function(){
 
     console.log("Main page...");
