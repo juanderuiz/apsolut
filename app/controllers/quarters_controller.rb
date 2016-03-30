@@ -1,5 +1,5 @@
 class QuartersController < ApplicationController
-  #before_filter :authenticate_user!
+  before_filter :authenticate_user!
   before_action :get_user
   before_action :get_quarter, only: [:show, :edit, :destroy, :update]
 
