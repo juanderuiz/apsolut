@@ -12,7 +12,7 @@
 <% end %>
 
 
-<div class="container-fluid hidden-lg">
+<div id="smalltable" class="container-fluid hidden-lg">
 
 <!-- ROW Starts -->
 
@@ -117,7 +117,7 @@
 <!-- End of Container Fluid for Quarters -->
 
 <!-- Container Fluid for LARGE DEVICES -->
-<div class="container-fluid visible-lg">
+<div id="largetable" class="container-fluid visible-lg">
 
 <%= render 'tableheaderlarge' %>
 
@@ -129,7 +129,7 @@
   <% @photo = Photo.where('user_id = ?', @owner.id).last %>
   <% logger.debug "User Loaded -> #{@owner.name}" %>
 
-  <div class="row text-center user_quarters">    
+  <div class="row text-center user_quarters hidden">    
   <% @quarters_by_year = quarters.group_by(&:year) %>
   <% @quarters_by_year.sort.each do |year, quarts| %>
   
@@ -227,7 +227,7 @@
   <% @photo = Photo.where('user_id = ?', @owner.id).last %>
   <% logger.debug "User Loaded -> #{@owner.name}" %>
 
-  <div class="row text-center user_quarters">    
+  <div class="row text-center user_quarters hidden">    
   <% @quarters_by_year = quarters.group_by(&:year) %>
   <% @quarters_by_year.sort.each do |year, quarts| %>
   
