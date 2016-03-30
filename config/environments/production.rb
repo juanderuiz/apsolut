@@ -35,7 +35,7 @@ Rails.application.configure do
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
   config.assets.precompile += %w( dashboard.js )
   config.assets.precompile += %w( radialProgress.js )
-  config.assets.precompile += %w( d3.js )
+  config.assets.precompile += %w( d3.min.js )
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for apache
