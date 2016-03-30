@@ -28,7 +28,7 @@
   <% @photo = Photo.where('user_id = ?', @owner.id).last %>
   <% logger.debug "User Loaded -> #{@owner.name}" %>
 
-  <div class="row text-center user_quarters hidden-lg">    
+  <div class="row text-center user_quarters hidden">    
   <% @quarters_by_year = quarters.group_by(&:year) %>
   <% @quarters_by_year.sort.each do |year, quarts| %>
   
@@ -133,7 +133,7 @@
   <% @photo = Photo.where('user_id = ?', @owner.id).last %>
   <% logger.debug "User Loaded -> #{@owner.name}" %>
 
-  <div class="row text-center user_quarters visible-lg">    
+  <div class="row text-center user_quarters hidden">    
   <% @quarters_by_year = quarters.group_by(&:year) %>
   <% @quarters_by_year.sort.each do |year, quarts| %>
   
@@ -231,7 +231,7 @@
   <% @photo = Photo.where('user_id = ?', @owner.id).last %>
   <% logger.debug "User Loaded -> #{@owner.name}" %>
 
-  <div class="row text-center user_quarters visible-lg">    
+  <div class="row text-center user_quarters hidden">    
   <% @quarters_by_year = quarters.group_by(&:year) %>
   <% @quarters_by_year.sort.each do |year, quarts| %>
   

@@ -1,6 +1,6 @@
 console.log("Entering Dashboard.js");
 
-$(document).on('ready',function(){
+$(document).on('ready page:change',function(){
 
     console.log("Main page...");
     var tables = $('#smalltable').length + $('#largetable').length;
@@ -9,7 +9,7 @@ $(document).on('ready',function(){
   
     
     //When starting or reloading... set the quarters of previous year
-    var inputValue = new Date().getFullYear()-1;
+    var inputValue = new Date().getFullYear();
     $('.current_year').val();
     $('.current_year_lg').val(inputValue);
     var quarters_year = $(".user_quarters").children();
