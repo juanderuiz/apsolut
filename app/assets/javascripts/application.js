@@ -16,5 +16,4 @@
 //= require jquery.ui.datepicker
 //= require turbolinks
 //= require jquery-readyselector
-//= require_tree .
 
