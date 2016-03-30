@@ -50,7 +50,7 @@ $(".dashboards.show").on('ready',function(){
 
     //start();
 
-});
+//});
 
 var windowReload = 0;
 var myVar = setInterval(function(){ changeDashboardInfo(); }, 40000);
@@ -93,3 +93,5 @@ function start() {
           .render();
       }
 }
+
+});
