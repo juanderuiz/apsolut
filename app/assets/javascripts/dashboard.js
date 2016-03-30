@@ -1,4 +1,4 @@
-$(".dashboards.show").on('ready',function(){
+$(".dashboards.show").on('page:change',function(){
 
     console.log("Main page...");
     var tables = $('#smalltable').length + $('#largetable').length;
